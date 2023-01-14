@@ -1,3 +1,27 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": [
+        "./*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ],
+    },
+  },
+  "exclude": [
+    "vendor",
+    "ios",
+    "android"
+  ],
+  "include": [
+    "__tests__/**/*",
+    "src/**/*",
+    ".*.js",
+    "*.js",
+    "*.ts",
+    "**/*.json"
+  ]
 }
