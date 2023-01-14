@@ -5,8 +5,8 @@
  * @format
  */
 
+import type { PropsWithChildren } from 'react';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +16,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {
   Colors,
   DebugInstructions,
@@ -29,7 +28,7 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
+function Section({ children, title }: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -55,7 +54,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -114,5 +113,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
