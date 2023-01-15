@@ -5,115 +5,52 @@
  * @format
  */
 
-import type { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
+  Button,
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
-  View,
 } from 'react-native';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import { store } from '@src/state';
+import { useAppDispatch, useAppSelector } from '@src/state/hooks';
+import { decrement, increment, selectCount } from '@src/state/slices/dummy';
 
-function Section({ children, title }: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+export const App: React.FC = () => (
+  <ReduxProvider store={store}>
+    <NavigationContainer>
+      <AppInner />
+    </NavigationContainer>
+  </ReduxProvider>
+);
 
-export function App(): JSX.Element {
+const AppInner: React.FC = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector(selectCount);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  return (
-    <NavigationContainer>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          <Header />
-          <View
-            style={{
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            }}>
-            <Section title="Step One">
-              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-              screen and then come back to see your edits.
-            </Section>
-            <Section title="See Your Changes">
-              <ReloadInstructions />
-            </Section>
-            <Section title="Debug">
-              <DebugInstructions />
-            </Section>
-            <Section title="Learn More">
-              Read the docs to discover what to do next:
-            </Section>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </NavigationContainer>
-  );
-}
+  const incrementCounter = useCallback(() => dispatch(increment()), [dispatch]);
+  const decrementCounter = useCallback(() => dispatch(decrement()), [dispatch]);
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+  return (
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <Text>{counter}</Text>
+      <Button title="Increment" onPress={incrementCounter} />
+      <Button title="Decrement" onPress={decrementCounter} />
+    </SafeAreaView>
+  );
+};
