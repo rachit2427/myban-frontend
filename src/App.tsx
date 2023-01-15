@@ -24,8 +24,6 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { APP_ENV } from '@env';
-
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -58,8 +56,6 @@ function Section({ children, title }: SectionProps): JSX.Element {
 
 export function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-
-  console.log(APP_ENV);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
