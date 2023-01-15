@@ -70,3 +70,6 @@ vendor
 
 # ENV
 /env/.env
+
+# Package-lock
+package-lock.json
