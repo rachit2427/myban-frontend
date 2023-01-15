@@ -7,6 +7,8 @@
     "name": "Rachit Dua"
   },
   "scripts": {
+    "setup": "yarn install && yarn pod-install",
+    "pod-install": "cd ios && bundle install && bundle exec pod install && cd ..",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
