@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     'import/no-default-export': 'error',
     'import/no-duplicates': 'error',
+    'no-console': 'warn',
     'simple-import-sort/imports': [
       'error',
       {
