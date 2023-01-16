@@ -29,6 +29,15 @@
       "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component)"
     ],
     "description": "Creates a React Arrow Function Component with ES7 module system in TypeScript",
-    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
+    "isFileTemplate": true
+  },
+  "useTheme": {
+    "prefix": "useTheme",
+    "body": [
+      "const {colors: themeColors} = useTheme()"
+    ],
+    "description": "Adds useTheme statement in code",
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
   }
 }
