@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Box } from 'react-native-flex-layout';
 
+import { ScrollView } from '@src/components/ScrollView';
 import { Text } from '@src/components/Text';
 import { useTheme } from '@src/hooks/useTheme';
 
@@ -10,7 +11,7 @@ const HomeComponent: React.FC<HomeProps> = ({}) => {
   const { colors: themeColors } = useTheme();
 
   return (
-    <>
+    <ScrollView>
       <Box bg={themeColors.backgroundPrimary}>
         <Text type="light" color="primary500">
           Hello
@@ -30,7 +31,7 @@ const HomeComponent: React.FC<HomeProps> = ({}) => {
         </Text>
         <Text type="medium">Hello</Text>
       </Box>
-    </>
+    </ScrollView>
   );
 };
 
