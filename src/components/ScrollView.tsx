@@ -10,20 +10,17 @@ export const ScrollView = forwardRef<ScrollViewBase, ScrollViewProps>(
     const insets = useSafeAreaInsets();
 
     const contentContainerStyle = StyleSheet.flatten([
-      { flexGrow: 1 },
+      {
+        flexGrow: 1,
+        paddingBottom: Math.max(insets.bottom, Spacing['x-large']),
+      },
       props.contentContainerStyle,
-    ]);
-
-    const style = StyleSheet.flatten([
-      { paddingBottom: Math.max(insets.bottom, Spacing['x-large']) },
-      props.style,
     ]);
 
     return (
       <ScrollViewBase
         {...props}
         contentContainerStyle={contentContainerStyle}
-        style={style}
         ref={ref}
       />
     );
