@@ -1,11 +1,9 @@
 import type { ParamListBase } from '@react-navigation/native';
 
-export interface RouteParamList extends ParamListBase {
-  Home: undefined;
+export enum Routes {
+  Home = 'Home',
 }
 
-export const Routes: { [Key in keyof RouteParamList]: string } = {
-  Home: 'Home',
-};
-
-export type Routes = typeof Routes;
+export interface RouteParamList extends ParamListBase {
+  [Routes.Home]: undefined;
+}
