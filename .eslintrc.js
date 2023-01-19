@@ -6,6 +6,7 @@ module.exports = {
     'simple-import-sort',
     'eslint-plugin-import',
     'unused-imports',
+    'eslint-plugin-local-rules',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,6 +16,8 @@ module.exports = {
   rules: {
     'import/no-default-export': 'error',
     'import/no-duplicates': 'error',
+    'import/first': 'error',
+    'react-native/no-unused-styles': 'warn',
     'no-console': 'warn',
     'simple-import-sort/imports': [
       'error',
@@ -55,5 +58,6 @@ module.exports = {
         patterns: ['.*'],
       },
     ],
+    'local-rules/disallow-importing-values-from-react-native/types': 'error',
   },
 };
