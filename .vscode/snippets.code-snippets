@@ -35,7 +35,17 @@
   "useTheme": {
     "prefix": "useTheme",
     "body": [
-      "const {colors: themeColors} = useTheme()"
+      "const {colors: themeColors} = useTheme${0}()"
+    ],
+    "description": "Adds useTheme statement in code",
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
+  },
+  "styles": {
+    "prefix": "styles",
+    "body": [
+      "import {StyleSheet} from 'react-native';",
+      "",
+      "const styles = StyleSheet.create({${0}})"
     ],
     "description": "Adds useTheme statement in code",
     "scope": "typescript,typescriptreact,javascript,javascriptreact",
