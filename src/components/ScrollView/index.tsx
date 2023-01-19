@@ -15,6 +15,7 @@ export const ScrollView = forwardRef<ScrollViewBase, ScrollViewProps>(
       {
         flexGrow: 1,
         paddingBottom: Math.max(insets.bottom, Spacing['x-large']),
+        paddingHorizontal: Spacing.large,
         backgroundColor: themeColors.backgroundSecondary,
       },
       props.contentContainerStyle,
