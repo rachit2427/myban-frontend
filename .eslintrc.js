@@ -14,6 +14,10 @@ module.exports = {
     project: ['./tsconfig.json'],
   },
   rules: {
+    'react/jsx-key': 'error',
+    'no-undefined': 'error',
+    'no-shadow-restricted-names': 'error',
+    'object-shorthand': ['error', 'properties'],
     'import/no-default-export': 'error',
     'import/no-duplicates': 'error',
     'import/first': 'error',

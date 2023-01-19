@@ -5,8 +5,8 @@ import { Shadow } from 'react-native-shadow-2';
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 import { Icon } from '@src/components/Icon';
-import { Box } from '@src/components/layout/Box';
-import { Stack } from '@src/components/layout/Stack';
+import { Box } from '@src/components/Layout/Box';
+import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
 import { Routes } from '@src/navigation/routes';
 import { Spacing } from '@src/utils/Spacing';
@@ -33,6 +33,8 @@ export const Header = ({
     navigation.navigate(Routes.Home);
   };
 
+  const canGoBack = navigation.canGoBack();
+
   return (
     <Shadow
       stretch
@@ -52,8 +54,12 @@ export const Header = ({
         direction="row"
         spacing={Spacing.large}
       >
-        <Box w={Spacing['xx-large']} justify="center" pt={Spacing['xx-small']}>
-          {!options.headerBackVisible ? (
+        <Box
+          minW={Spacing['xx-large']}
+          justify="center"
+          pt={Spacing['xx-small']}
+        >
+          {options.headerBackVisible !== false && canGoBack ? (
             <Icon name="ArrowBack" onPress={goBack} size={24} />
           ) : null}
         </Box>
@@ -64,8 +70,8 @@ export const Header = ({
           </Text>
         </Box>
 
-        <Box w={Spacing['xx-large']} justify="center">
-          {options.headerRight?.({ canGoBack: navigation.canGoBack() })}
+        <Box minW={Spacing['xx-large']} justify="center">
+          {options.headerRight?.({ canGoBack })}
         </Box>
       </Stack>
     </Shadow>
