@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Shadow } from 'react-native-shadow-2';
 
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
@@ -8,16 +7,16 @@ import { Icon } from '@src/components/Icon';
 import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
+import { useHeaderHeight } from '@src/hooks/useHeaderHeight';
+import { useTheme } from '@src/hooks/useTheme';
 import { Routes } from '@src/navigation/routes';
 import { Spacing } from '@src/utils/Spacing';
-
-export const HEADER_HEIGHT = 60;
 
 export const Header = ({
   options,
   navigation,
 }: NativeStackHeaderProps): React.ReactNode => {
-  const insets = useSafeAreaInsets();
+  const { colors: themeColors } = useTheme();
 
   const title =
     typeof options.headerTitle === 'string'
@@ -35,6 +34,9 @@ export const Header = ({
 
   const canGoBack = navigation.canGoBack();
 
+  const { headerHeight, headerPaddingTop, headerPaddingBottom } =
+    useHeaderHeight(options.presentation !== 'modal');
+
   return (
     <Shadow
       stretch
@@ -47,12 +49,16 @@ export const Header = ({
       }}
     >
       <Stack
-        pt={insets.top + Spacing.medium}
-        pb={Spacing.medium}
+        pt={headerPaddingTop}
+        pb={headerPaddingBottom}
         ph={Spacing.large}
-        h={insets.top + HEADER_HEIGHT}
+        h={headerHeight}
         direction="row"
         spacing={Spacing.large}
+        style={[
+          { backgroundColor: themeColors.backgroundPrimary },
+          options.headerStyle,
+        ]}
       >
         <Box
           minW={Spacing['xx-large']}

@@ -15,8 +15,6 @@ module.exports = {
   },
   rules: {
     'react/jsx-key': 'error',
-    'no-undefined': 'error',
-    'no-shadow-restricted-names': 'error',
     'object-shorthand': ['error', 'properties'],
     'import/no-default-export': 'error',
     'import/no-duplicates': 'error',
@@ -63,5 +61,6 @@ module.exports = {
       },
     ],
     'local-rules/disallow-importing-values-from-react-native/types': 'error',
+    'local-rules/disallow-importing-types-from-react-native': 'error',
   },
 };

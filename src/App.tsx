@@ -10,13 +10,13 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import { AppNavigator } from '@src/navigation/AppNavigator';
+import { AppEntry } from '@src/AppEntry';
 import { store } from '@src/state';
 
 export const App: React.FC = () => (
   <ReduxProvider store={store}>
     <NavigationContainer>
-      <AppNavigator />
+      <AppEntry />
     </NavigationContainer>
   </ReduxProvider>
 );
