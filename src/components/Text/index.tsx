@@ -30,12 +30,12 @@ export const Text = forwardRef<TextBase, TextProps>(
     );
 
     const style = StyleSheet.flatten([
-      styleProp,
       {
         fontFamily,
         color,
         fontSize: size,
       },
+      styleProp,
     ]);
 
     return <TextBase ref={ref} {...props} style={style} />;
