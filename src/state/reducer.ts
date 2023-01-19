@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { counterReducer } from '@src/state/slices/dummy';
+import { keyboardReducer } from '@src/state/slices/keyboard';
 
-export const rootReducer = combineReducers({ ...counterReducer });
+export const rootReducer = combineReducers({ ...keyboardReducer });
