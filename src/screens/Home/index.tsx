@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { Box } from 'react-native-flex-layout';
 
-import { Icon } from '@src/components/Icon';
 import { ScrollView } from '@src/components/ScrollView';
 import { Text } from '@src/components/Text';
 import { useTheme } from '@src/hooks/useTheme';
@@ -22,8 +21,6 @@ const HomeComponent: React.FC<HomeProps> = ({}) => {
         </Text>
         <Text type="medium">Hello</Text>
       </Box>
-
-      <Icon />
 
       <Box bg={themeColors.backgroundSecondary}>
         <Text type="light" color="primary500">

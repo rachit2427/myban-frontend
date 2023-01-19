@@ -4,10 +4,11 @@ import { Shadow } from 'react-native-shadow-2';
 
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
+import { Icon } from '@src/components/Icon';
 import { Box } from '@src/components/layout/Box';
 import { Stack } from '@src/components/layout/Stack';
 import { Text } from '@src/components/Text';
-import { useTheme } from '@src/hooks/useTheme';
+import { Routes } from '@src/navigation/routes';
 import { Spacing } from '@src/utils/Spacing';
 
 export const HEADER_HEIGHT = 60;
@@ -17,15 +18,24 @@ export const Header = ({
   navigation,
 }: NativeStackHeaderProps): React.ReactNode => {
   const insets = useSafeAreaInsets();
-  const { colors: themeColors } = useTheme();
 
   const title =
     typeof options.headerTitle === 'string'
       ? options.headerTitle
       : options.title || '';
 
+  const goBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+      return;
+    }
+
+    navigation.navigate(Routes.Home);
+  };
+
   return (
     <Shadow
+      stretch
       distance={3}
       sides={{
         start: false,
@@ -33,31 +43,28 @@ export const Header = ({
         top: false,
         bottom: true,
       }}
-      stretch>
+    >
       <Stack
         pt={insets.top + Spacing.medium}
         pb={Spacing.medium}
         ph={Spacing.large}
         h={insets.top + HEADER_HEIGHT}
-        bg={themeColors.red50}
         direction="row"
-        spacing={Spacing.large}>
-        <Box
-          bg={themeColors.blue400}
-          w={Spacing['xx-large']}
-          justify="center"
-        />
+        spacing={Spacing.large}
+      >
+        <Box w={Spacing['xx-large']} justify="center" pt={Spacing['xx-small']}>
+          {!options.headerBackVisible ? (
+            <Icon name="ArrowBack" onPress={goBack} size={24} />
+          ) : null}
+        </Box>
 
-        <Box bg={themeColors.green300} flex={1} justify="center">
+        <Box flex={1} justify="center">
           <Text type="medium" size={18} numberOfLines={1}>
             {title}
           </Text>
         </Box>
 
-        <Box
-          bg={themeColors.yellow400}
-          w={Spacing['xx-large']}
-          justify="center">
+        <Box w={Spacing['xx-large']} justify="center">
           {options.headerRight?.({ canGoBack: navigation.canGoBack() })}
         </Box>
       </Stack>
