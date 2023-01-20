@@ -10,7 +10,7 @@ interface BoxProps extends ComponentProps<typeof BoxBase> {
   align?: ViewStyle['alignItems'];
 }
 
-export const BoxComponent: React.FC<BoxProps> = ({
+const BoxComponent: React.FC<BoxProps> = ({
   flex,
   justify,
   align,

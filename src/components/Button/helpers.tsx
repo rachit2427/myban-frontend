@@ -1,4 +1,4 @@
-import type { TextStyle, ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native/types';
 
 import type { ButtonProps } from '@src/components/Button';
 import type { Colors } from '@src/utils/Colors';

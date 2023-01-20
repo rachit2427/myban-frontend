@@ -1,13 +1,16 @@
 import type { PropsWithChildren } from 'react';
 import React, { memo, useMemo } from 'react';
-import type { ActivityIndicatorProps } from 'react-native';
 import { ActivityIndicator, Pressable } from 'react-native';
+import type {
+  ActivityIndicatorProps,
+  PressableProps,
+} from 'react-native/types';
 
 import { getButtonStyles } from '@src/components/Button/helpers';
 import { Text } from '@src/components/Text';
 import { useTheme } from '@src/hooks/useTheme';
 
-export interface ButtonProps {
+export interface ButtonProps extends PressableProps {
   type?: 'success';
   onPress?: () => void;
   loading?: boolean;
@@ -19,6 +22,7 @@ const ButtonComponent: React.FC<PropsWithChildren<ButtonProps>> = ({
   children,
   loading,
   loaderSize = 'small',
+  disabled: disabledProp,
   ...props
 }) => {
   const { colors: themeColors } = useTheme();
@@ -26,8 +30,13 @@ const ButtonComponent: React.FC<PropsWithChildren<ButtonProps>> = ({
   const [buttonContainerStyles, buttonTextStyles, activityIndicatorColor] =
     useMemo(() => getButtonStyles(type, themeColors), [themeColors, type]);
 
+  const disabled = useMemo(
+    () => loading || disabledProp,
+    [disabledProp, loading],
+  );
+
   return (
-    <Pressable {...props} style={buttonContainerStyles}>
+    <Pressable {...props} disabled={disabled} style={buttonContainerStyles}>
       {loading ? (
         <ActivityIndicator
           animating={loading}
