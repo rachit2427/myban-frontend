@@ -22,6 +22,7 @@ const AddNewComponent: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   const [iban, setIban] = useState('');
+  const [alias, setAlias] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
@@ -40,6 +41,7 @@ const AddNewComponent: React.FC = () => {
     await dispatch(
       addIBAN({
         iban,
+        alias,
         firstname: firstName,
         lastname: lastName,
       }),
@@ -47,7 +49,7 @@ const AddNewComponent: React.FC = () => {
 
     setSaving(false);
     safeGoBack(navigation);
-  }, [dispatch, firstName, iban, lastName, navigation]);
+  }, [alias, dispatch, firstName, iban, lastName, navigation]);
 
   const onChangeIBAN = useCallback((value: string) => {
     setIbanError('');
@@ -71,6 +73,8 @@ const AddNewComponent: React.FC = () => {
               onChangeText={onChangeIBAN}
               errorMessage={ibanError}
             />
+
+            <Input placeholder="Alias" value={alias} onChangeText={setAlias} />
 
             <Stack spacing={Spacing.large} direction="row">
               <Box flex={1}>

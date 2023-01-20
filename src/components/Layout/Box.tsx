@@ -4,21 +4,28 @@ import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native/types';
 import { Box as BoxBase } from 'react-native-flex-layout';
 
-interface BoxProps extends ComponentProps<typeof BoxBase> {
+export interface BoxProps extends ComponentProps<typeof BoxBase> {
   flex?: ViewStyle['flex'];
   justify?: ViewStyle['justifyContent'];
   align?: ViewStyle['alignItems'];
+  direction?: ViewStyle['flexDirection'];
 }
 
 const BoxComponent: React.FC<BoxProps> = ({
   flex,
   justify,
   align,
+  direction,
   style: styleProp,
   ...props
 }) => {
   const style = StyleSheet.flatten([
-    { flex, justifyContent: justify, alignItems: align },
+    {
+      flex,
+      justifyContent: justify,
+      alignItems: align,
+      flexDirection: direction,
+    },
     styleProp,
   ]);
 
