@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '@src/state';
+import { Slices } from '@src/state/slices';
 
 interface KeyboardState {
   isShown: boolean;
@@ -11,7 +12,7 @@ const initialState: KeyboardState = {
 };
 
 const keyboardSlice = createSlice({
-  name: '@keyboard',
+  name: Slices.Keyboard,
   initialState,
   reducers: {
     show: state => {
