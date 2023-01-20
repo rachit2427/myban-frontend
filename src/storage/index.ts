@@ -7,7 +7,10 @@ export enum StorageKeys {
 }
 
 export class Storage<T> {
-  constructor(private readonly key: string) {}
+  constructor(private readonly key: string) {
+    this.getData = this.getData.bind(this);
+    this.storeData = this.storeData.bind(this);
+  }
 
   public async storeData(value: T): Promise<void> {
     try {

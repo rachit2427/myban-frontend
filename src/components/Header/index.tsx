@@ -9,7 +9,7 @@ import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
 import { useHeaderHeight } from '@src/hooks/useHeaderHeight';
 import { useTheme } from '@src/hooks/useTheme';
-import { Routes } from '@src/navigation/routes';
+import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
 export const Header = ({
@@ -23,14 +23,7 @@ export const Header = ({
       ? options.headerTitle
       : options.title || '';
 
-  const goBack = () => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-      return;
-    }
-
-    navigation.navigate(Routes.Home);
-  };
+  const goBack = () => safeGoBack(navigation);
 
   const canGoBack = navigation.canGoBack();
 

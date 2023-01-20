@@ -1,5 +1,7 @@
 import React, { memo, useCallback, useState } from 'react';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { Button } from '@src/components/Button';
 import { Input } from '@src/components/Input';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
@@ -7,11 +9,16 @@ import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
 import { ScrollView } from '@src/components/ScrollView';
 import { validateFormData } from '@src/screens/AddNew/helpers';
+import { useAppDispatch } from '@src/state/hooks';
+import { addIBAN } from '@src/state/thunk/iban';
+import type { NavigationProps } from '@src/types/navigation';
+import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
-interface AddNewProps {}
+const AddNewComponent: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<NavigationProps>();
 
-const AddNewComponent: React.FC<AddNewProps> = ({}) => {
   const [saving, setSaving] = useState(false);
 
   const [iban, setIban] = useState('');
@@ -30,8 +37,17 @@ const AddNewComponent: React.FC<AddNewProps> = ({}) => {
       return;
     }
 
+    await dispatch(
+      addIBAN({
+        iban,
+        firstname: firstName,
+        lastname: lastName,
+      }),
+    );
+
     setSaving(false);
-  }, [iban]);
+    safeGoBack(navigation);
+  }, [dispatch, firstName, iban, lastName, navigation]);
 
   const onChangeIBAN = useCallback((value: string) => {
     setIbanError('');
