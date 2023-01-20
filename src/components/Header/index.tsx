@@ -1,14 +1,16 @@
 import React from 'react';
-import { Shadow } from 'react-native-shadow-2';
 
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 import { Icon } from '@src/components/Icon';
 import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
+import { Surface } from '@src/components/Surface';
 import { Text } from '@src/components/Text';
 import { useHeaderHeight } from '@src/hooks/useHeaderHeight';
 import { useTheme } from '@src/hooks/useTheme';
+import type { RouteParamList } from '@src/navigation/routes';
+import type { NavigationProps } from '@src/types/navigation';
 import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
@@ -23,7 +25,8 @@ export const Header = ({
       ? options.headerTitle
       : options.title || '';
 
-  const goBack = () => safeGoBack(navigation);
+  const goBack = () =>
+    safeGoBack(navigation as NavigationProps<keyof RouteParamList>);
 
   const canGoBack = navigation.canGoBack();
 
@@ -31,16 +34,7 @@ export const Header = ({
     useHeaderHeight(options.presentation !== 'modal');
 
   return (
-    <Shadow
-      stretch
-      distance={3}
-      sides={{
-        start: false,
-        end: false,
-        top: false,
-        bottom: true,
-      }}
-    >
+    <Surface distance={3} sides={{ left: false, right: false, top: false }}>
       <Stack
         pt={headerPaddingTop}
         pb={headerPaddingBottom}
@@ -73,6 +67,6 @@ export const Header = ({
           {options.headerRight?.({ canGoBack })}
         </Box>
       </Stack>
-    </Shadow>
+    </Surface>
   );
 };

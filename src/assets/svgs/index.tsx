@@ -5,4 +5,5 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
 /* eslint-disable prettier/prettier */
 export {default as ArrowBack} from './arrow_back.svg';
+export {default as ChevronRight} from './chevron_right.svg';
 export {default as Plus} from './plus.svg';

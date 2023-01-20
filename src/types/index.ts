@@ -1,5 +1,6 @@
 export interface IBAN {
   iban: string;
+  alias: string;
   firstname: string;
   lastname: string;
 }

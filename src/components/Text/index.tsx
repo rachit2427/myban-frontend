@@ -38,7 +38,7 @@ export const Text = forwardRef<TextBase, TextProps>(
       styleProp,
     ]);
 
-    return <TextBase ref={ref} {...props} style={style} />;
+    return <TextBase suppressHighlighting ref={ref} {...props} style={style} />;
   },
 );
 
