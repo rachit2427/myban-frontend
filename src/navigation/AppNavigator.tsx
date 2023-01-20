@@ -17,6 +17,17 @@ export const AppNavigator: React.FC = () => (
       options={{
         headerTitle: '',
         headerRight: AddNewItem,
+        headerBackVisible: false,
+      }}
+    />
+
+    <Stack.Screen
+      name={Routes.AddNew}
+      getComponent={() => require('../screens/AddNew').AddNew}
+      options={{
+        presentation: 'modal',
+        headerTitle: 'Add New IBAN',
+        animation: 'slide_from_bottom',
       }}
     />
   </Stack.Navigator>

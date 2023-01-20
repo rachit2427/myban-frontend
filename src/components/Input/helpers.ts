@@ -1,5 +1,5 @@
-import type { TextStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
+import type { TextStyle } from 'react-native/types';
 
 import type { InputProps } from '@src/components/Input';
 import type { Colors } from '@src/utils/Colors';
@@ -8,6 +8,8 @@ import { Spacing } from '@src/utils/Spacing';
 export const getInputStyles = (
   type: InputProps['type'],
   colors: Colors,
+  isFocused: boolean,
+  hasError: boolean,
 ): TextStyle | undefined => {
   const baseStyles: TextStyle = {
     paddingVertical: Spacing.medium,
@@ -17,6 +19,10 @@ export const getInputStyles = (
     fontSize: 16,
   };
 
+  const errorStyles: TextStyle = { borderColor: colors.red600 };
+
+  const focusedStyles: TextStyle = { borderColor: colors.blue500 };
+
   switch (type) {
     case 'regular':
       return {
@@ -24,6 +30,9 @@ export const getInputStyles = (
         backgroundColor: colors.backgroundPrimary,
         borderColor: colors.shade400,
         color: colors.shade800,
+
+        ...(isFocused ? focusedStyles : undefined),
+        ...(hasError ? errorStyles : undefined),
       };
 
     default:
