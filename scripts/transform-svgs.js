@@ -26,6 +26,7 @@ fs.readdir(folderPath, (directoryReadError, files) => {
         data
           .replace('height="24"', '')
           .replace('width="24"', '')
+          .replaceAll('viewbox="0 0 24 24"', '')
           .replace('  ', ' ')
           .replace(' >', '>')
           .replace('<svg ', '<svg viewbox="0 0 24 24" '),

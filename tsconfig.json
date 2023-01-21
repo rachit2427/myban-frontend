@@ -24,6 +24,7 @@
     "*.ts",
     "**/*.json",
     "types/**/*",
-    "scripts/**/*"
+    "scripts/**/*",
+    "web/**/*"
   ]
 }
