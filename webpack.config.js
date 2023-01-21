@@ -10,7 +10,6 @@ const compileNodeModules = [
   // Add every react-native package that needs compiling
   'react-native-qrcode-svg',
   'react-native-shadow-2',
-  'react-native-svg-transformer',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
@@ -63,7 +62,6 @@ module.exports = {
     extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js'],
     alias: {
       'react-native$': 'react-native-web',
-      'react-native-svg': 'react-native-svg-web',
     },
   },
   module: {

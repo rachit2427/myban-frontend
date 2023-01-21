@@ -103,6 +103,8 @@ const EditComponent: React.FC = () => {
     };
   });
 
+  if (!iban) return null;
+
   return (
     <IBANFormProvider value={formState}>
       <KeyboardAwareView offset={{ android: Spacing['x-large'] }}>

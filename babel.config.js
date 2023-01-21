@@ -30,5 +30,6 @@ module.exports = {
         },
       },
     ],
+    ['react-native-web', { commonjs: true }],
   ],
 };

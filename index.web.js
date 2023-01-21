@@ -10,6 +10,7 @@ import { App } from '@src/App';
 if (module.hot) {
   module.hot.accept();
 }
+
 AppRegistry.registerComponent(appName, () => App);
 AppRegistry.runApplication(appName, {
   initialProps: {},
