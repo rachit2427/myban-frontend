@@ -7,6 +7,7 @@ export type NavigationProps<
   Route extends keyof RouteParamList = keyof RouteParamList,
 > = NativeStackNavigationProp<RouteParamList, Route>;
 
-export type RouteProps<
-  Route extends keyof RouteParamList = keyof RouteParamList,
-> = RouteProp<RouteParamList, Route>;
+export type RouteProps<Route extends keyof RouteParamList> = RouteProp<
+  RouteParamList,
+  Route
+>;

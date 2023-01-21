@@ -6,4 +6,5 @@
 /* eslint-disable prettier/prettier */
 export {default as ArrowBack} from './arrow_back.svg';
 export {default as ChevronRight} from './chevron_right.svg';
+export {default as EditNote} from './edit_note.svg';
 export {default as Plus} from './plus.svg';

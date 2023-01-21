@@ -25,6 +25,16 @@ const IBANStorage = () => {
     if (index <= -1) return data;
 
     const newData = data.splice(index, 1);
+
+    await storeData(newData);
+    return newData;
+  };
+
+  const replaceData = async (iban: IBANWithID): Promise<IBANWithID[]> => {
+    const data = await getData([]);
+    const newData = data.map(d => (d.id === iban.id ? iban : d));
+
+    await storeData(newData);
     return newData;
   };
 
@@ -32,6 +42,7 @@ const IBANStorage = () => {
     pushData,
     removeData,
     loadData: () => getData([]),
+    replaceData,
   };
 };
 

@@ -1,14 +1,12 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Button } from '@src/components/Button';
-import { Input } from '@src/components/Input';
+import { IBANForm } from '@src/components/Forms/IBAN';
+import type { IBANFormState } from '@src/components/Forms/IBAN/IBANFormProvider';
+import { IBANFormProvider } from '@src/components/Forms/IBAN/IBANFormProvider';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
-import { Box } from '@src/components/Layout/Box';
-import { Stack } from '@src/components/Layout/Stack';
 import { ScrollView } from '@src/components/ScrollView';
-import { validateFormData } from '@src/screens/AddNew/helpers';
 import { useAppDispatch } from '@src/state/hooks';
 import { addIBAN } from '@src/state/thunk/iban';
 import type { NavigationProps } from '@src/types/navigation';
@@ -19,88 +17,32 @@ const AddNewComponent: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProps>();
 
-  const [saving, setSaving] = useState(false);
+  const onPressSave = useCallback(
+    async ({ iban, alias, firstname, lastname }: IBANFormState) => {
+      await dispatch(
+        addIBAN({
+          iban: iban.value,
+          alias: alias.value,
+          firstname: firstname.value,
+          lastname: lastname.value,
+        }),
+      );
+    },
+    [dispatch],
+  );
 
-  const [iban, setIban] = useState('');
-  const [alias, setAlias] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-
-  const [ibanError, setIbanError] = useState('');
-
-  const onPress = useCallback(async () => {
-    setSaving(true);
-    const isValidIBAN = await validateFormData(iban);
-
-    if (!isValidIBAN) {
-      setIbanError('Invalid IBAN. Please try again.');
-      setSaving(false);
-      return;
-    }
-
-    await dispatch(
-      addIBAN({
-        iban,
-        alias,
-        firstname: firstName,
-        lastname: lastName,
-      }),
-    );
-
-    setSaving(false);
+  const postSave = useCallback(() => {
     safeGoBack(navigation);
-  }, [alias, dispatch, firstName, iban, lastName, navigation]);
-
-  const onChangeIBAN = useCallback((value: string) => {
-    setIbanError('');
-    setIban(value);
-  }, []);
+  }, [navigation]);
 
   return (
-    <KeyboardAwareView offset={{ android: Spacing['x-large'] }}>
-      <ScrollView>
-        <Stack
-          pt={Spacing.large}
-          spacing={Spacing.large}
-          justify="between"
-          flex={1}
-        >
-          <Stack spacing={Spacing.large}>
-            <Input
-              autoFocus
-              placeholder="ABXXXXXXXX... (required)"
-              value={iban}
-              onChangeText={onChangeIBAN}
-              errorMessage={ibanError}
-            />
-
-            <Input placeholder="Alias" value={alias} onChangeText={setAlias} />
-
-            <Stack spacing={Spacing.large} direction="row">
-              <Box flex={1}>
-                <Input
-                  placeholder="First Name"
-                  value={firstName}
-                  onChangeText={setFirstName}
-                />
-              </Box>
-
-              <Box flex={1}>
-                <Input
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChangeText={setLastName}
-                />
-              </Box>
-            </Stack>
-          </Stack>
-
-          <Button loading={saving} onPress={onPress}>
-            Save IBAN
-          </Button>
-        </Stack>
-      </ScrollView>
-    </KeyboardAwareView>
+    <IBANFormProvider>
+      <KeyboardAwareView offset={{ android: Spacing['x-large'] }}>
+        <ScrollView>
+          <IBANForm onPressSave={onPressSave} postSave={postSave} />
+        </ScrollView>
+      </KeyboardAwareView>
+    </IBANFormProvider>
   );
 };
 

@@ -12,8 +12,8 @@ const HomeComponent: React.FC = () => {
 
   return (
     <ScrollView style={{ backgroundColor: themeColors.backgroundSecondary }}>
-      {ibans.map(iban => (
-        <IBANCard key={iban.id} {...iban} />
+      {ibans.map((iban, index) => (
+        <IBANCard key={iban.id} {...iban} index={index} />
       ))}
     </ScrollView>
   );
