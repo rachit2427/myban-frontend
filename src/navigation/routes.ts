@@ -9,5 +9,5 @@ export enum Routes {
 export interface RouteParamList extends ParamListBase {
   [Routes.Home]: undefined;
   [Routes.AddNew]: undefined;
-  [Routes.Edit]: { index: number };
+  [Routes.Edit]: { id: string };
 }

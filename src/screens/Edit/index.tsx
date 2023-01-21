@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import { Spacer } from 'react-native-flex-layout';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -6,13 +7,18 @@ import { IBANForm } from '@src/components/Forms/IBAN';
 import type { IBANFormState } from '@src/components/Forms/IBAN/IBANFormProvider';
 import { IBANFormProvider } from '@src/components/Forms/IBAN/IBANFormProvider';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
+import { Box } from '@src/components/Layout/Box';
+import { Stack } from '@src/components/Layout/Stack';
+import { QrCode } from '@src/components/QrCode';
 import { ScrollView } from '@src/components/ScrollView';
 import { useIBANName } from '@src/hooks/useIbanName';
 import type { Routes } from '@src/navigation/routes';
 import { useAppDispatch, useAppSelector } from '@src/state/hooks';
 import { selectIBANs } from '@src/state/slices/iban';
-import { replaceIBAN } from '@src/state/thunk/iban';
-import type { RouteProps } from '@src/types/navigation';
+import { removeIBAN, replaceIBAN } from '@src/state/thunk/iban';
+import type { IBANWithID } from '@src/types';
+import type { NavigationProps, RouteProps } from '@src/types/navigation';
+import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
 const getFormState = (key: string) => ({
@@ -22,17 +28,17 @@ const getFormState = (key: string) => ({
 
 const EditComponent: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps<Routes.Edit>>();
 
   const allIBANs = useAppSelector(selectIBANs);
 
   const ibanWithId = useMemo(
-    () => allIBANs[route.params.index],
-    [allIBANs, route.params.index],
-  );
+    () => allIBANs.find(iban => iban.id === route.params.id),
+    [allIBANs, route.params.id],
+  ) as IBANWithID;
 
-  const [iban] = useIBANName(ibanWithId.iban);
+  const [iban] = useIBANName(ibanWithId.iban || '');
 
   useEffect(() => {
     navigation.setOptions({
@@ -70,13 +76,26 @@ const EditComponent: React.FC = () => {
     [dispatch, ibanWithId.id],
   );
 
+  const onPressDelete = useCallback(() => {
+    dispatch(removeIBAN(ibanWithId.id));
+    safeGoBack(navigation);
+  }, [dispatch, ibanWithId.id, navigation]);
+
   if (!iban) return null;
 
   return (
     <IBANFormProvider value={formState}>
       <KeyboardAwareView offset={{ android: Spacing['x-large'] }}>
-        <ScrollView>
-          <IBANForm onPressSave={onPressSave} />
+        <ScrollView contentContainerStyle={{ paddingTop: Spacing.large }}>
+          <Stack flex={1} spacing={Spacing.large}>
+            <Box align="center">
+              <QrCode iban={ibanWithId.iban} />
+            </Box>
+
+            <Spacer fill={false} />
+
+            <IBANForm onPressSave={onPressSave} onPressDelete={onPressDelete} />
+          </Stack>
         </ScrollView>
       </KeyboardAwareView>
     </IBANFormProvider>

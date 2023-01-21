@@ -10,16 +10,14 @@ import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
 import { useIBANName } from '@src/hooks/useIbanName';
 import { Routes } from '@src/navigation/routes';
-import type { IBAN } from '@src/types';
+import type { IBANWithID } from '@src/types';
 import type { NavigationProps } from '@src/types/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
-interface Props extends IBAN {
-  index: number;
-}
+interface Props extends IBANWithID {}
 
 const IBANCardComponent: React.FC<Props> = ({
-  index,
+  id,
   alias,
   iban,
   firstname,
@@ -34,8 +32,8 @@ const IBANCardComponent: React.FC<Props> = ({
   );
 
   const onPress = useCallback(() => {
-    navigation.navigate(Routes.Edit, { index });
-  }, [index, navigation]);
+    navigation.navigate(Routes.Edit, { id });
+  }, [id, navigation]);
 
   return (
     <Box mt={Spacing.large}>
