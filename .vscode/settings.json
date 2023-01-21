@@ -23,7 +23,10 @@
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "cSpell.words": [
-    "IBAN"
+    "firstname",
+    "IBAN",
+    "IBANQR",
+    "lastname"
   ],
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"

@@ -88,8 +88,8 @@ export const IBANForm: React.FC<Props> = ({
     await onPressSaveProp?.({
       iban,
       alias,
-      firstname: lastname,
-      lastname: firstname,
+      firstname,
+      lastname,
     });
 
     setSaving(false);
@@ -220,7 +220,7 @@ const AccessoryRight: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
         flex={1}
         justify="center"
       >
-        <Icon name="EditNote" onPress={onPress} />
+        <Icon name="EditNote" />
       </Box>
     </Pressable>
   );

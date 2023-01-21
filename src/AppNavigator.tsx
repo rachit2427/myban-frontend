@@ -21,24 +21,29 @@ export const AppNavigator: React.FC = () => (
       }}
     />
 
-    <Stack.Screen
-      name={Routes.AddNew}
-      getComponent={() => require('./screens/AddNew').AddNew}
-      options={{
+    <Stack.Group
+      screenOptions={{
         presentation: 'modal',
-        headerTitle: 'Add New IBAN',
         animation: 'slide_from_bottom',
       }}
-    />
+    >
+      <Stack.Screen
+        name={Routes.AddNew}
+        getComponent={() => require('./screens/AddNew').AddNew}
+        options={{ headerTitle: 'Add New IBAN' }}
+      />
 
-    <Stack.Screen
-      name={Routes.Edit}
-      getComponent={() => require('./screens/Edit').Edit}
-      options={{
-        presentation: 'modal',
-        headerTitle: '',
-        animation: 'slide_from_bottom',
-      }}
-    />
+      <Stack.Screen
+        name={Routes.Edit}
+        getComponent={() => require('./screens/Edit').Edit}
+        options={{ headerTitle: '' }}
+      />
+
+      <Stack.Screen
+        name={Routes.View}
+        getComponent={() => require('./screens/View').ViewScreen}
+        options={{ headerTitle: '' }}
+      />
+    </Stack.Group>
   </Stack.Navigator>
 );

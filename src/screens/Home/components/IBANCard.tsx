@@ -13,6 +13,7 @@ import { Routes } from '@src/navigation/routes';
 import type { IBANWithID } from '@src/types';
 import type { NavigationProps } from '@src/types/navigation';
 import { Spacing } from '@src/utils/Spacing';
+import { getName } from '@src/utils/string';
 
 interface Props extends IBANWithID {}
 
@@ -27,13 +28,13 @@ const IBANCardComponent: React.FC<Props> = ({
   const [ibanName, toggleMasking] = useIBANName(iban);
 
   const name = useMemo(
-    () => `${firstname} ${lastname}`.trim(),
+    () => getName(firstname, lastname),
     [firstname, lastname],
   );
 
   const onPress = useCallback(() => {
-    navigation.navigate(Routes.Edit, { id });
-  }, [id, navigation]);
+    navigation.navigate(Routes.View, { iban, firstname, lastname });
+  }, [firstname, iban, lastname, navigation]);
 
   return (
     <Box mt={Spacing.large}>
