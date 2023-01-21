@@ -20,11 +20,7 @@ const IBANStorage = () => {
 
   const removeData = async (id: string): Promise<IBANWithID[]> => {
     const data = await getData([]);
-    const index = data.findIndex(iban => iban.id === id);
-
-    if (index <= -1) return data;
-
-    const newData = data.splice(index, 1);
+    const newData = data.filter(iban => iban.id !== id);
 
     await storeData(newData);
     return newData;

@@ -38,7 +38,7 @@ const AddNewComponent: React.FC = () => {
   return (
     <IBANFormProvider>
       <KeyboardAwareView offset={{ android: Spacing['x-large'] }}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingTop: Spacing.large }}>
           <IBANForm onPressSave={onPressSave} postSave={postSave} />
         </ScrollView>
       </KeyboardAwareView>

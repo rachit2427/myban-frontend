@@ -6,7 +6,7 @@ import { useCallback, useMemo, useState } from 'react';
  * @returns `[masked/unmasked IBAN, toggleMasking]`
  */
 export const useIBANName = (
-  ibanString: string,
+  ibanString: string = '',
   masked = true,
 ): [string, () => void] => {
   const [isMasked, setIsMasked] = useState(masked);

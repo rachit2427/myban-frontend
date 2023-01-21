@@ -2,6 +2,7 @@ import type { RefObject } from 'react';
 import React, { useCallback, useRef, useState } from 'react';
 import { Pressable } from 'react-native';
 import type { TextInput } from 'react-native/types';
+import { Spacer } from 'react-native-flex-layout';
 
 import { Button } from '@src/components/Button';
 import { validateFormData } from '@src/components/Forms/IBAN/helpers';
@@ -20,12 +21,18 @@ import { Spacing } from '@src/utils/Spacing';
 interface Props {
   onPressSave?: (s: IBANFormState) => void;
   postSave?: () => void;
+  onPressDelete?: () => void;
 }
 
-export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
+export const IBANForm: React.FC<Props> = ({
+  onPressSave: onPressSaveProp,
+  postSave,
+  onPressDelete: onPressDeleteProp,
+}) => {
   const formState = useIBANFormContext();
 
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const [iban, setIban] = useState(formState.iban);
   const [alias, setAlias] = useState(formState.alias);
@@ -68,7 +75,7 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
     [],
   );
 
-  const onPress = useCallback(async () => {
+  const onPressSave = useCallback(async () => {
     setSaving(true);
     const isValidIBAN = await validateFormData(iban.value);
 
@@ -78,7 +85,7 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
       return;
     }
 
-    await onPressSave?.({
+    await onPressSaveProp?.({
       iban,
       alias,
       firstname: lastname,
@@ -87,16 +94,19 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
 
     setSaving(false);
     postSave?.();
-  }, [alias, lastname, iban, firstname, onPressSave, postSave]);
+  }, [alias, lastname, iban, firstname, onPressSaveProp, postSave]);
+
+  const onPressDelete = useCallback(async () => {
+    setDeleting(true);
+
+    await onPressDeleteProp?.();
+
+    setDeleting(false);
+  }, [onPressDeleteProp]);
 
   return (
-    <Stack
-      pt={Spacing.large}
-      spacing={Spacing.large}
-      justify="between"
-      flex={1}
-    >
-      <Stack divider={<Divider />}>
+    <Stack spacing={Spacing.large} justify="between" flex={1}>
+      <Stack spacing={Spacing.large}>
         <Input
           autoFocus
           placeholder="ABXXXXXXXX... (required)"
@@ -114,6 +124,8 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
           onSubmitEditing={() => aliasRef.current?.focus()}
         />
 
+        <Spacer />
+
         <Input
           placeholder="Alias"
           value={alias.value}
@@ -128,6 +140,8 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
           returnKeyType="next"
           onSubmitEditing={() => firstnameRef.current?.focus()}
         />
+
+        <Spacer />
 
         <Stack spacing={Spacing.large} direction="row">
           <Box flex={1}>
@@ -150,6 +164,8 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
             />
           </Box>
 
+          <Spacer fill={false} />
+
           <Box flex={1}>
             <Input
               placeholder="Last Name"
@@ -165,21 +181,33 @@ export const IBANForm: React.FC<Props> = ({ onPressSave, postSave }) => {
               }
               ref={lastnameRef}
               returnKeyType="go"
-              onSubmitEditing={onPress}
+              onSubmitEditing={onPressSave}
               autoComplete="name-family"
             />
           </Box>
         </Stack>
       </Stack>
 
-      <Button loading={saving} onPress={onPress}>
-        Save IBAN
-      </Button>
+      <Stack spacing={Spacing.medium} direction="row">
+        <Box flex={1}>
+          <Button loading={saving} onPress={onPressSave}>
+            Save IBAN
+          </Button>
+        </Box>
+
+        <Spacer fill={false} />
+
+        {onPressDeleteProp ? (
+          <Box flex={1}>
+            <Button type="danger" onPress={onPressDelete} loading={deleting}>
+              Delete
+            </Button>
+          </Box>
+        ) : null}
+      </Stack>
     </Stack>
   );
 };
-
-const Divider = () => <Box mb={Spacing.large} />;
 
 const AccessoryRight: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
   const { colors: themeColors } = useTheme();

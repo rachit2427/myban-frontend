@@ -28,6 +28,13 @@ export const getButtonStyles = (
         colors.white,
       ];
 
+    case 'danger':
+      return [
+        { ...defaultContainerStyles, backgroundColor: colors.red800 },
+        { ...defaultTextStyles },
+        colors.white,
+      ];
+
     default:
       return [defaultContainerStyles, defaultTextStyles, colors.white];
   }

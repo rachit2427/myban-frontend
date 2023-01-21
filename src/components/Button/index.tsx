@@ -11,7 +11,7 @@ import { Text } from '@src/components/Text';
 import { useTheme } from '@src/hooks/useTheme';
 
 export interface ButtonProps extends PressableProps {
-  type?: 'success';
+  type?: 'success' | 'danger';
   onPress?: () => void;
   loading?: boolean;
   loaderSize?: ActivityIndicatorProps['size'];
