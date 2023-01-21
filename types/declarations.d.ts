@@ -5,3 +5,10 @@ declare module '*.svg' {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare module 'react-native-screen-brightness' {
+  const setBrightness: (brightness: number) => void;
+  const getBrightness: () => Promise<number>;
+
+  export default { setBrightness, getBrightness };
+}

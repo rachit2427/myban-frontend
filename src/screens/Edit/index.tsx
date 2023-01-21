@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { Spacer } from 'react-native-flex-layout';
+import ScreenBrightness from 'react-native-screen-brightness';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -12,6 +13,7 @@ import { Stack } from '@src/components/Layout/Stack';
 import { QrCode } from '@src/components/QrCode';
 import { ScrollView } from '@src/components/ScrollView';
 import { useIBANName } from '@src/hooks/useIbanName';
+import { useMount } from '@src/hooks/useMount';
 import type { Routes } from '@src/navigation/routes';
 import { useAppDispatch, useAppSelector } from '@src/state/hooks';
 import { selectIBANs } from '@src/state/slices/iban';
@@ -80,6 +82,26 @@ const EditComponent: React.FC = () => {
     dispatch(removeIBAN(ibanWithId.id));
     safeGoBack(navigation);
   }, [dispatch, ibanWithId.id, navigation]);
+
+  useMount(() => {
+    let defaultBrightness = 0.5;
+    (async () => {
+      try {
+        defaultBrightness = await ScreenBrightness.getBrightness();
+        ScreenBrightness.setBrightness(1);
+      } catch {
+        // Don't handle errors
+      }
+    })();
+
+    return () => {
+      try {
+        ScreenBrightness.setBrightness(defaultBrightness);
+      } catch {
+        // Don't handle errors
+      }
+    };
+  });
 
   if (!iban) return null;
 
