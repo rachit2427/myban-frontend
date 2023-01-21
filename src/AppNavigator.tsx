@@ -13,7 +13,7 @@ export const AppNavigator: React.FC = () => (
   <Stack.Navigator screenOptions={defaultScreenOptions}>
     <Stack.Screen
       name={Routes.Home}
-      getComponent={() => require('../screens/Home').Home}
+      getComponent={() => require('./screens/Home').Home}
       options={{
         headerTitle: '',
         headerRight: AddNewItem,
@@ -23,10 +23,20 @@ export const AppNavigator: React.FC = () => (
 
     <Stack.Screen
       name={Routes.AddNew}
-      getComponent={() => require('../screens/AddNew').AddNew}
+      getComponent={() => require('./screens/AddNew').AddNew}
       options={{
         presentation: 'modal',
         headerTitle: 'Add New IBAN',
+        animation: 'slide_from_bottom',
+      }}
+    />
+
+    <Stack.Screen
+      name={Routes.Edit}
+      getComponent={() => require('./screens/Edit').Edit}
+      options={{
+        presentation: 'modal',
+        headerTitle: '',
         animation: 'slide_from_bottom',
       }}
     />

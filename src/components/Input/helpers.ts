@@ -1,42 +1,71 @@
 import { StyleSheet } from 'react-native';
-import type { TextStyle } from 'react-native/types';
+import type { TextStyle, ViewStyle } from 'react-native/types';
 
 import type { InputProps } from '@src/components/Input';
 import type { Colors } from '@src/utils/Colors';
 import { Spacing } from '@src/utils/Spacing';
 
-export const getInputStyles = (
-  type: InputProps['type'],
-  colors: Colors,
-  isFocused: boolean,
-  hasError: boolean,
-): TextStyle | undefined => {
-  const baseStyles: TextStyle = {
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.small,
+interface Options {
+  type: InputProps['type'];
+  colors: Colors;
+  isFocused: boolean;
+  hasError: boolean;
+  disabled: boolean;
+}
+
+export const getInputStyles = ({
+  type,
+  colors,
+  disabled,
+  hasError,
+  isFocused,
+}: Options): [ViewStyle | undefined, TextStyle | undefined] => {
+  const baseContainerStyles: TextStyle = {
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 4,
-    fontSize: 16,
+    height: 42,
+    flex: 1,
+    padding: 0,
   };
 
-  const errorStyles: TextStyle = { borderColor: colors.red600 };
+  const baseInputStyles: TextStyle = {
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.small,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    fontSize: 16,
+    height: '100%',
+    width: '100%',
+    flex: 1,
+  };
 
-  const focusedStyles: TextStyle = { borderColor: colors.blue500 };
+  const disabledContainerStyles: ViewStyle = {
+    backgroundColor: colors.backgroundSecondary,
+  };
+
+  const errorContainerStyles: ViewStyle = { borderColor: colors.red600 };
+
+  const focusedContainerStyles: ViewStyle = { borderColor: colors.blue500 };
 
   switch (type) {
     case 'regular':
-      return {
-        ...baseStyles,
-        backgroundColor: colors.backgroundPrimary,
-        borderColor: colors.shade400,
-        color: colors.shade800,
+      return [
+        {
+          ...baseContainerStyles,
+          backgroundColor: colors.backgroundPrimary,
+          borderColor: colors.shade400,
 
-        ...(isFocused ? focusedStyles : undefined),
-        ...(hasError ? errorStyles : undefined),
-      };
+          ...(isFocused ? focusedContainerStyles : undefined),
+          ...(hasError ? errorContainerStyles : undefined),
+          ...(disabled ? disabledContainerStyles : undefined),
+        },
+        {
+          ...baseInputStyles,
+          color: colors.shade800,
+        },
+      ];
 
     default:
-      return;
+      return [undefined, undefined];
   }
 };
 

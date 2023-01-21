@@ -32,6 +32,7 @@ export const ScrollView = forwardRef<ScrollViewBase, ScrollViewProps>(
         contentContainerStyle={contentContainerStyle}
         style={style}
         ref={ref}
+        keyboardShouldPersistTaps="handled"
       />
     );
   },

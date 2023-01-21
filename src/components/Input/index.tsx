@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import type { ReactElement } from 'react';
+import React, { forwardRef, useCallback, useMemo, useState } from 'react';
+import { TextInput } from 'react-native';
 import type {
   NativeSyntheticEvent,
   TextInputFocusEventData,
@@ -19,68 +20,94 @@ import { Spacing } from '@src/utils/Spacing';
 export interface InputProps extends TextInputProps {
   type?: 'regular';
   errorMessage?: string;
+  accessoryRight?: ReactElement;
+  mb?: number;
 }
 
-export const Input: React.FC<InputProps> = ({
-  type = 'regular',
-  errorMessage,
-  style: styleProp,
-  onFocus: onFocusProp,
-  onBlur: onBlurProp,
-  ...props
-}) => {
-  const { colors: themeColors } = useTheme();
-  const [isFocused, setIsFocused] = useState(false);
-
-  const onFocus = useCallback(
-    (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      setIsFocused(true);
-      onFocusProp?.(e);
+export const Input = forwardRef<TextInput, InputProps>(
+  (
+    {
+      mb,
+      type = 'regular',
+      errorMessage,
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
+      accessoryRight,
+      ...props
     },
-    [onFocusProp],
-  );
+    ref,
+  ) => {
+    const { colors: themeColors } = useTheme();
+    const [isFocused, setIsFocused] = useState(false);
 
-  const onBlur = useCallback(
-    (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      setIsFocused(false);
-      onBlurProp?.(e);
-    },
-    [onBlurProp],
-  );
+    const onFocus = useCallback(
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+        setIsFocused(true);
+        onFocusProp?.(e);
+      },
+      [onFocusProp],
+    );
 
-  const hasError = Boolean(errorMessage && errorMessage.length !== 0);
+    const onBlur = useCallback(
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+        setIsFocused(false);
+        onBlurProp?.(e);
+      },
+      [onBlurProp],
+    );
 
-  const styles = useMemo(
-    () =>
-      StyleSheet.flatten([
-        getInputStyles(type, themeColors, isFocused, hasError),
-        styleProp,
-      ]),
-    [hasError, isFocused, styleProp, themeColors, type],
-  );
+    const hasError = Boolean(errorMessage && errorMessage.length !== 0);
 
-  const placeholderColor = useMemo(
-    () => getPlaceholderColor(type, themeColors),
-    [themeColors, type],
-  );
+    const [containerStyles, inputStyles] = useMemo(
+      () =>
+        getInputStyles({
+          type,
+          colors: themeColors,
+          disabled: !props.editable,
+          isFocused,
+          hasError,
+        }),
+      [hasError, isFocused, props.editable, themeColors, type],
+    );
 
-  return (
-    <Stack spacing={Spacing['x-small']}>
-      <TextInput
-        placeholderTextColor={placeholderColor}
-        {...props}
-        style={styles}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
+    const placeholderColor = useMemo(
+      () => getPlaceholderColor(type, themeColors),
+      [themeColors, type],
+    );
 
-      {hasError ? (
-        <Box mb={Spacing.small}>
-          <Text type="light" color="red600" size={14}>
-            {errorMessage}
-          </Text>
+    return (
+      <Stack spacing={Spacing['x-small']} mb={mb}>
+        <Box
+          radius={4}
+          direction="row"
+          style={containerStyles}
+          overflow="hidden"
+        >
+          <TextInput
+            placeholderTextColor={placeholderColor}
+            {...props}
+            style={inputStyles}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            autoCorrect={false}
+            ref={ref}
+          />
+
+          {accessoryRight ? (
+            <Box justify="center" align="center">
+              {accessoryRight}
+            </Box>
+          ) : null}
         </Box>
-      ) : null}
-    </Stack>
-  );
-};
+
+        {hasError ? (
+          <Box mb={Spacing.small}>
+            <Text type="light" color="red600" size={14}>
+              {errorMessage}
+            </Text>
+          </Box>
+        ) : null}
+      </Stack>
+    );
+  },
+);
