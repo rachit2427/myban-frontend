@@ -14,10 +14,10 @@ import type { NavigationProps } from '@src/types/navigation';
 import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
-export const Header = ({
+export const Header: React.FC<NativeStackHeaderProps> = ({
   options,
   navigation,
-}: NativeStackHeaderProps): React.ReactNode => {
+}) => {
   const { colors: themeColors } = useTheme();
 
   const title =
