@@ -22,13 +22,21 @@ const IconComponent: React.FC<IconProps> = ({
   const Component = SVGs[name];
 
   return (
-    <Pressable {...pressableProps}>
+    <Wrapper {...pressableProps}>
       <Component
         color={themeColors[color]}
         style={{ height: size, width: size }}
       />
-    </Pressable>
+    </Wrapper>
   );
+};
+
+const Wrapper: React.FC<PressableProps> = pressableProps => {
+  if (pressableProps.onPress) {
+    return <Pressable {...pressableProps} />;
+  }
+
+  return <>{pressableProps.children}</>;
 };
 
 export const Icon = memo(IconComponent);

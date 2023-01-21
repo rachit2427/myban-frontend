@@ -7,10 +7,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { IBANForm } from '@src/components/Forms/IBAN';
 import type { IBANFormState } from '@src/components/Forms/IBAN/IBANFormProvider';
 import { IBANFormProvider } from '@src/components/Forms/IBAN/IBANFormProvider';
+import { IBANQR } from '@src/components/IBANQR';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
 import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
-import { QrCode } from '@src/components/QrCode';
 import { ScrollView } from '@src/components/ScrollView';
 import { useIBANName } from '@src/hooks/useIbanName';
 import { useMount } from '@src/hooks/useMount';
@@ -88,7 +88,7 @@ const EditComponent: React.FC = () => {
     (async () => {
       try {
         defaultBrightness = await ScreenBrightness.getBrightness();
-        ScreenBrightness.setBrightness(1);
+        ScreenBrightness.setBrightness(Math.max(defaultBrightness, 0.75));
       } catch {
         // Don't handle errors
       }
@@ -111,7 +111,7 @@ const EditComponent: React.FC = () => {
         <ScrollView contentContainerStyle={{ paddingTop: Spacing.large }}>
           <Stack flex={1} spacing={Spacing.large}>
             <Box align="center">
-              <QrCode iban={ibanWithId.iban} />
+              <IBANQR iban={ibanWithId.iban} />
             </Box>
 
             <Spacer fill={false} />
