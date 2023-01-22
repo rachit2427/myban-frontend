@@ -8,6 +8,7 @@ import { Stack } from '@src/components/Layout/Stack';
 import { Surface } from '@src/components/Surface';
 import { Text } from '@src/components/Text';
 import { useHeaderHeight } from '@src/hooks/useHeaderHeight';
+import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useTheme } from '@src/hooks/useTheme';
 import type { RouteParamList } from '@src/navigation/routes';
 import type { NavigationProps } from '@src/types/navigation';
@@ -19,6 +20,7 @@ export const Header: React.FC<NativeStackHeaderProps> = ({
   navigation,
 }) => {
   const { colors: themeColors } = useTheme();
+  const isDarkMode = useIsDarkMode();
 
   const title =
     typeof options.headerTitle === 'string'
@@ -43,7 +45,11 @@ export const Header: React.FC<NativeStackHeaderProps> = ({
         direction="row"
         spacing={Spacing.large}
         style={[
-          { backgroundColor: themeColors.backgroundPrimary },
+          {
+            backgroundColor: isDarkMode
+              ? themeColors.black
+              : themeColors.brandPrimary,
+          },
           options.headerStyle,
         ]}
       >
@@ -52,13 +58,15 @@ export const Header: React.FC<NativeStackHeaderProps> = ({
           justify="center"
           pt={Spacing['xx-small']}
         >
-          {options.headerBackVisible !== false && canGoBack ? (
-            <Icon name="ArrowBack" onPress={goBack} size={24} />
+          {options.headerLeft ? (
+            options.headerLeft({ canGoBack })
+          ) : options.headerBackVisible !== false && canGoBack ? (
+            <Icon name="ArrowBack" onPress={goBack} size={24} color="grey50" />
           ) : null}
         </Box>
 
         <Box flex={1} justify="center">
-          <Text type="medium" size={18} numberOfLines={1}>
+          <Text type="medium" size={18} numberOfLines={1} color="grey50">
             {title}
           </Text>
         </Box>

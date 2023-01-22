@@ -20,10 +20,11 @@ export const AddNewItem: React.FC = () => {
   return (
     <Pressable onPress={onPress}>
       <Stack spacing={Spacing['x-small']} direction="row" align="center">
-        <Text size={14} color="blue600">
+        <Text size={14} color="brandSecondary" type="medium">
           Add New IBAN
         </Text>
-        <Icon name="Plus" size={18} color="blue600" />
+
+        <Icon name="Plus" size={16} color="brandSecondary" />
       </Stack>
     </Pressable>
   );

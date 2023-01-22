@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AddNewItem } from '@src/components/Header/AddNewItem';
+import { Logo } from '@src/components/Logo';
 import type { RouteParamList } from '@src/navigation/routes';
 import { Routes } from '@src/navigation/routes';
 import { defaultScreenOptions } from '@src/navigation/screenOptions';
@@ -10,6 +11,11 @@ import { defaultScreenOptions } from '@src/navigation/screenOptions';
 const Stack = createNativeStackNavigator<RouteParamList>();
 
 export const AppNavigator: React.FC = () => {
+  const HomeHeaderLeft = useCallback(
+    () => <Logo height={100} width={100} background={false} />,
+    [],
+  );
+
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen
@@ -18,6 +24,7 @@ export const AppNavigator: React.FC = () => {
         options={{
           headerTitle: '',
           headerRight: AddNewItem,
+          headerLeft: HomeHeaderLeft,
           headerBackVisible: false,
         }}
       />

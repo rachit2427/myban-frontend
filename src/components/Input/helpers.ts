@@ -42,7 +42,7 @@ export const getInputStyles = ({
     backgroundColor: colors.backgroundSecondary,
   };
 
-  const errorContainerStyles: ViewStyle = { borderColor: colors.red600 };
+  const errorContainerStyles: ViewStyle = { borderColor: colors.red500 };
 
   const focusedContainerStyles: ViewStyle = { borderColor: colors.blue500 };
 
@@ -52,7 +52,7 @@ export const getInputStyles = ({
         {
           ...baseContainerStyles,
           backgroundColor: colors.backgroundPrimary,
-          borderColor: colors.shade400,
+          borderColor: colors.shade200,
 
           ...(isFocused ? focusedContainerStyles : undefined),
           ...(hasError ? errorContainerStyles : undefined),

@@ -9,6 +9,8 @@ import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
 import { useIBANName } from '@src/hooks/useIbanName';
+import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
+import { useTheme } from '@src/hooks/useTheme';
 import { Routes } from '@src/navigation/routes';
 import type { IBANWithID } from '@src/types';
 import type { NavigationProps } from '@src/types/navigation';
@@ -24,6 +26,8 @@ const IBANCardComponent: React.FC<Props> = ({
   firstname,
   lastname,
 }) => {
+  const isDarkMode = useIsDarkMode();
+  const { colors: themeColors } = useTheme();
   const navigation = useNavigation<NavigationProps>();
   const [ibanName, toggleMasking] = useIBANName(iban);
 
@@ -39,23 +43,33 @@ const IBANCardComponent: React.FC<Props> = ({
   return (
     <Box mt={Spacing.large}>
       <Pressable onPress={onPress}>
-        <Card ph={16} pv={16} offset={{ x: 0, y: 1 }}>
+        <Card
+          ph={Spacing.large}
+          pv={Spacing.large}
+          offset={{ x: 0, y: 1 }}
+          bg={isDarkMode ? themeColors.backgroundPrimary : themeColors.white}
+        >
           <Stack spacing={Spacing.medium} direction="row">
-            <Stack flex={1} spacing={Spacing['x-small']} align="flex-start">
+            <Stack
+              flex={1}
+              spacing={Spacing['x-small']}
+              align="flex-start"
+              justify="center"
+            >
               <Pressable
                 onPress={toggleMasking}
                 hitSlop={{ top: 8, bottom: 8 }}
               >
-                <Text type="medium" color="shade700">
+                <Text type="medium" color="shade900">
                   {alias || ibanName}
                 </Text>
               </Pressable>
 
-              {name ? <Text color="yellow800">{name}</Text> : null}
+              {name ? <Text color="yellow700">{name}</Text> : null}
             </Stack>
 
             <Box justify="center">
-              <Icon name="ChevronRight" />
+              <Icon name="ChevronRight" size={30} color="brandPrimary" />
             </Box>
           </Stack>
         </Card>
