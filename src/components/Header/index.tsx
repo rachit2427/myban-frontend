@@ -48,7 +48,7 @@ export const Header: React.FC<NativeStackHeaderProps> = ({
           {
             backgroundColor: isDarkMode
               ? themeColors.black
-              : themeColors.brandPrimary,
+              : themeColors.blue400,
           },
           options.headerStyle,
         ]}

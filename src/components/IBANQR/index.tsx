@@ -1,11 +1,15 @@
 import React, { memo, useMemo } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import type { QRCodeProps } from 'react-native-qrcode-svg';
 import QRCode from 'react-native-qrcode-svg';
 
+import LogoImage from '@root/assets/icons/logo_square.png';
+import { MAX_CONTAINER_WIDTH } from '@src/components/Container';
+import { Box } from '@src/components/Layout/Box';
 import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useTheme } from '@src/hooks/useTheme';
 import type { IBAN } from '@src/types';
+// import LogoNoBg from '@root/assets/icons/logo_no_bg.png';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -27,16 +31,29 @@ const IBANQRComponent: React.FC<IBANQRProps> = ({
     () => `https://google.com/?i=${iban}&fn=${firstname}&ln=${lastname}`,
     [firstname, iban, lastname],
   );
-  const size = windowWidth * 0.7;
+  const size = useMemo(
+    () =>
+      (Platform.OS === 'web'
+        ? Math.min(windowWidth, MAX_CONTAINER_WIDTH)
+        : windowWidth) * 0.7,
+    [],
+  );
 
   return (
-    <QRCode
-      value={value}
-      size={size}
-      color={isDarkMode ? themeColors.white : themeColors.black}
-      backgroundColor={'transparent'}
-      {...props}
-    />
+    <Box radius={8} overflow="hidden">
+      <QRCode
+        value={value}
+        size={size}
+        color={isDarkMode ? themeColors.white : themeColors.black}
+        backgroundColor={themeColors.shade0}
+        logo={LogoImage}
+        logoBorderRadius={8}
+        logoBackgroundColor={themeColors.white}
+        logoSize={size * 0.25}
+        logoMargin={2}
+        {...props}
+      />
+    </Box>
   );
 };
 

@@ -67,6 +67,7 @@ const InvertibleColors = {
   backgroundPrimary: '#ffffff',
   backgroundSecondary: '#eaeaea',
 
+  shade0: '#ffffff',
   shade50: '#eaeaea',
   shade100: '#d5d5d5',
   shade200: '#c0c0c0',
