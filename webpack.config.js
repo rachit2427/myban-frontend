@@ -25,7 +25,7 @@ const babelLoaderConfiguration = {
     options: {
       cacheDirectory: true,
       presets,
-      plugins: ['react-native-web'],
+      plugins: [['react-native-web', { commonjs: true }]],
     },
   },
 };

@@ -1,4 +1,4 @@
-package com.myiban;
+package com.MyBAN;
 
 import android.os.Bundle;
 
@@ -6,6 +6,9 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+
+// Splash screen
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -15,7 +18,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "myiban";
+    return "MyBAN";
   }
 
   /**
@@ -41,6 +44,7 @@ public class MainActivity extends ReactActivity {
   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this, R.style.SplashScreenTheme, true);
     super.onCreate(null);
   }
 }
