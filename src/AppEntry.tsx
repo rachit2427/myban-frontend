@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 
 import { AppNavigator } from '@src/AppNavigator';
+import { Container } from '@src/components/Container';
 import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useKeyboardShown } from '@src/hooks/useKeyboardShown';
 import { useMount } from '@src/hooks/useMount';
@@ -31,7 +32,11 @@ const AppEntryComponent: React.FC = () => {
     StatusBar.setBarStyle(isDarkMode ? 'light-content' : 'dark-content');
   }, [isDarkMode]);
 
-  return <AppNavigator />;
+  return (
+    <Container>
+      <AppNavigator />
+    </Container>
+  );
 };
 
 export const AppEntry = memo(AppEntryComponent);

@@ -37,8 +37,8 @@ const IBANCardComponent: React.FC<Props> = ({
   );
 
   const onPress = useCallback(() => {
-    navigation.navigate(Routes.View, { iban, firstname, lastname });
-  }, [firstname, iban, lastname, navigation]);
+    navigation.navigate(Routes.Edit, { id });
+  }, [id, navigation]);
 
   return (
     <Box mt={Spacing.large}>
@@ -69,7 +69,7 @@ const IBANCardComponent: React.FC<Props> = ({
             </Stack>
 
             <Box justify="center">
-              <Icon name="ChevronRight" size={30} color="brandPrimary" />
+              <Icon name="ChevronRight" size={30} color="blue300" />
             </Box>
           </Stack>
         </Card>

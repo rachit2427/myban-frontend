@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import Clipboard from '@react-native-clipboard/clipboard';
 
@@ -84,17 +84,21 @@ const CopyToClipboard: React.FC<{ text: string }> = ({ text }) => {
   }, [mountedRef, text]);
 
   return (
-    <Pressable onPress={onCopy}>
+    <Pressable onPress={onCopy} style={styles.flex}>
       <Box
-        bg={copied ? themeColors.green600 : themeColors.blue500}
+        bg={copied ? themeColors.green600 : themeColors.blue400}
         flex={1}
         justify="center"
         ph={Spacing.medium}
       >
-        <Icon name={copied ? 'Check' : 'Copy'} color="white" />
+        <Icon name={copied ? 'Check' : 'Copy'} color="white" size={24} />
       </Box>
     </Pressable>
   );
 };
 
 export const ViewScreen = memo(ViewScreenComponent);
+
+const styles = StyleSheet.create({
+  flex: { flex: 1 },
+});
