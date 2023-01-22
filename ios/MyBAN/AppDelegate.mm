@@ -1,13 +1,19 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"myiban";
-  return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  self.moduleName = @"MyBAN";
+
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
+
+  [RNSplashScreen show];
+
+  return YES;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

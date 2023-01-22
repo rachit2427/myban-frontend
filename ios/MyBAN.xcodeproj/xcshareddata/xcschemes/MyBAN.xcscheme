@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "myiban.app"
-               BlueprintName = "myiban"
-               ReferencedContainer = "container:myiban.xcodeproj">
+               BuildableName = "MyBAN.app"
+               BlueprintName = "MyBAN"
+               ReferencedContainer = "container:MyBAN.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "myibanTests.xctest"
-               BlueprintName = "myibanTests"
-               ReferencedContainer = "container:myiban.xcodeproj">
+               BuildableName = "MyBANTests.xctest"
+               BlueprintName = "MyBANTests"
+               ReferencedContainer = "container:MyBAN.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "myiban.app"
-            BlueprintName = "myiban"
-            ReferencedContainer = "container:myiban.xcodeproj">
+            BuildableName = "MyBAN.app"
+            BlueprintName = "MyBAN"
+            ReferencedContainer = "container:MyBAN.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "myiban.app"
-            BlueprintName = "myiban"
-            ReferencedContainer = "container:myiban.xcodeproj">
+            BuildableName = "MyBAN.app"
+            BlueprintName = "MyBAN"
+            ReferencedContainer = "container:MyBAN.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

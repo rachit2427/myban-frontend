@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.myiban"
+    namespace "com.MyBAN"
     defaultConfig {
-        applicationId "com.myiban"
+        applicationId "com.MyBAN"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,4 +1,4 @@
-package com.myiban;
+package com.MyBAN;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
