@@ -12,3 +12,7 @@ declare module 'react-native-screen-brightness' {
 
   export default { setBrightness, getBrightness };
 }
+
+declare module '*.png';
+declare module '*.jpeg';
+declare module '*.jpg';

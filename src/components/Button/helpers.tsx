@@ -23,14 +23,14 @@ export const getButtonStyles = (
   switch (type) {
     case 'success':
       return [
-        { ...defaultContainerStyles, backgroundColor: colors.green500 },
+        { ...defaultContainerStyles, backgroundColor: colors.green600 },
         { ...defaultTextStyles },
         colors.white,
       ];
 
     case 'danger':
       return [
-        { ...defaultContainerStyles, backgroundColor: colors.red800 },
+        { ...defaultContainerStyles, backgroundColor: colors.red500 },
         { ...defaultTextStyles },
         colors.white,
       ];

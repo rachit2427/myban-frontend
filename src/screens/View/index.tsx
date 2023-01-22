@@ -49,7 +49,7 @@ const ViewScreenComponent: React.FC<ViewProps> = () => {
         <Stack spacing={Spacing.medium}>
           {name.length !== 0 ? (
             <Box mt={Spacing.large}>
-              <Text type="medium" size={24}>
+              <Text type="medium" size={24} color="shade800">
                 {name}'s IBAN
               </Text>
             </Box>
@@ -86,18 +86,12 @@ const CopyToClipboard: React.FC<{ text: string }> = ({ text }) => {
   return (
     <Pressable onPress={onCopy}>
       <Box
-        bg={copied ? themeColors.green500 : themeColors.blue500}
+        bg={copied ? themeColors.green600 : themeColors.blue500}
         flex={1}
         justify="center"
         ph={Spacing.medium}
       >
-        {copied ? (
-          <Text size={14} color="white">
-            Copied!
-          </Text>
-        ) : (
-          <Icon name="Copy" color="white" />
-        )}
+        <Icon name={copied ? 'Check' : 'Copy'} color="white" />
       </Box>
     </Pressable>
   );

@@ -6,6 +6,7 @@
  */
 
 import React, { useCallback } from 'react';
+import { Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -17,7 +18,7 @@ import { store } from '@src/state';
 
 export const App: React.FC = () => {
   const onReady = useCallback(() => {
-    SplashScreen.hide();
+    Platform.OS !== 'web' && SplashScreen.hide();
   }, []);
 
   return (

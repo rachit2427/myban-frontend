@@ -216,7 +216,7 @@ const AccessoryRight: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
     <Pressable onPress={onPress}>
       <Box
         ph={Spacing.small}
-        bg={themeColors.shade300}
+        bg={themeColors.shade200}
         flex={1}
         justify="center"
       >

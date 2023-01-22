@@ -102,7 +102,7 @@ export const Input = forwardRef<TextInput, InputProps>(
 
         {hasError ? (
           <Box mb={Spacing.small}>
-            <Text type="light" color="red600" size={14}>
+            <Text type="light" color="red500" size={14}>
               {errorMessage}
             </Text>
           </Box>
