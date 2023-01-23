@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -11,11 +11,6 @@ import { defaultScreenOptions } from '@src/navigation/screenOptions';
 const Stack = createNativeStackNavigator<RouteParamList>();
 
 export const AppNavigator: React.FC = () => {
-  const HomeHeaderLeft = useCallback(
-    () => <Logo height={100} width={100} background={false} />,
-    [],
-  );
-
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen
@@ -23,7 +18,7 @@ export const AppNavigator: React.FC = () => {
         getComponent={() => require('./screens/Home').Home}
         options={{
           headerTitle: '',
-          headerRight: AddNewItem,
+          headerRight: HomeHeaderRight,
           headerLeft: HomeHeaderLeft,
           headerBackVisible: false,
         }}
@@ -56,3 +51,9 @@ export const AppNavigator: React.FC = () => {
     </Stack.Navigator>
   );
 };
+
+const HomeHeaderLeft = () => (
+  <Logo height={100} width={100} background={false} />
+);
+
+const HomeHeaderRight = () => <AddNewItem />;

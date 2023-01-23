@@ -10,3 +10,4 @@ export {default as ChevronRight} from './chevron_right.svg';
 export {default as Copy} from './copy.svg';
 export {default as EditNote} from './edit_note.svg';
 export {default as Plus} from './plus.svg';
+export {default as Share} from './share.svg';

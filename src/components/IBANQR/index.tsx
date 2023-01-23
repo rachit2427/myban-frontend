@@ -6,6 +6,7 @@ import QRCode from 'react-native-qrcode-svg';
 import LogoImage from '@root/assets/icons/logo_square.png';
 import { MAX_CONTAINER_WIDTH } from '@src/components/Container';
 import { Box } from '@src/components/Layout/Box';
+import { useIBANUrl } from '@src/hooks/useIBANUrl';
 import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useTheme } from '@src/hooks/useTheme';
 import type { IBAN } from '@src/types';
@@ -27,10 +28,8 @@ const IBANQRComponent: React.FC<IBANQRProps> = ({
   const isDarkMode = useIsDarkMode();
   const { colors: themeColors } = useTheme();
 
-  const value = useMemo(
-    () => `https://google.com/?i=${iban}&fn=${firstname}&ln=${lastname}`,
-    [firstname, iban, lastname],
-  );
+  const { fullUrl: QRUrl } = useIBANUrl({ iban, firstname, lastname });
+
   const size = useMemo(
     () =>
       (Platform.OS === 'web'
@@ -42,7 +41,7 @@ const IBANQRComponent: React.FC<IBANQRProps> = ({
   return (
     <Box radius={8} overflow="hidden">
       <QRCode
-        value={value}
+        value={QRUrl}
         size={size}
         color={isDarkMode ? themeColors.white : themeColors.black}
         backgroundColor={themeColors.shade0}

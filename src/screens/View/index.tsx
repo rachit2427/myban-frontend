@@ -18,9 +18,7 @@ import { useAppNavigation, useAppRoute } from '@src/types/navigation';
 import { Spacing } from '@src/utils/Spacing';
 import { getName } from '@src/utils/string';
 
-interface ViewProps {}
-
-const ViewScreenComponent: React.FC<ViewProps> = () => {
+const ViewScreenComponent: React.FC = () => {
   const route = useAppRoute<Routes.View>();
   const navigation = useAppNavigation();
 
@@ -43,7 +41,7 @@ const ViewScreenComponent: React.FC<ViewProps> = () => {
     <ScrollView>
       <Stack pt={Spacing.large} spacing={Spacing['xx-large']} justify="start">
         <Box align="center">
-          <IBANQR iban={iban} />
+          <IBANQR iban={iban} firstname={firstname} lastname={lastname} />
         </Box>
 
         <Stack spacing={Spacing.medium}>

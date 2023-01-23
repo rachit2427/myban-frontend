@@ -1,17 +1,15 @@
 import React, { useCallback } from 'react';
 import { Pressable } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-
 import { Icon } from '@src/components/Icon';
 import { Stack } from '@src/components/Layout/Stack';
 import { Text } from '@src/components/Text';
 import { Routes } from '@src/navigation/routes';
-import type { NavigationProps } from '@src/types/navigation';
+import { useAppNavigation } from '@src/types/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
 export const AddNewItem: React.FC = () => {
-  const navigation = useNavigation<NavigationProps>();
+  const navigation = useAppNavigation();
 
   const onPress = useCallback(() => {
     navigation.navigate(Routes.AddNew);

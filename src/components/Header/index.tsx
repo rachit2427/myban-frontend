@@ -7,12 +7,10 @@ import { Box } from '@src/components/Layout/Box';
 import { Stack } from '@src/components/Layout/Stack';
 import { Surface } from '@src/components/Surface';
 import { Text } from '@src/components/Text';
+import { useGoBack } from '@src/hooks/useGoBack';
 import { useHeaderHeight } from '@src/hooks/useHeaderHeight';
 import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useTheme } from '@src/hooks/useTheme';
-import type { RouteParamList } from '@src/navigation/routes';
-import type { NavigationProps } from '@src/types/navigation';
-import { safeGoBack } from '@src/utils/navigation';
 import { Spacing } from '@src/utils/Spacing';
 
 export const Header: React.FC<NativeStackHeaderProps> = ({
@@ -21,14 +19,12 @@ export const Header: React.FC<NativeStackHeaderProps> = ({
 }) => {
   const { colors: themeColors } = useTheme();
   const isDarkMode = useIsDarkMode();
+  const goBack = useGoBack();
 
   const title =
     typeof options.headerTitle === 'string'
       ? options.headerTitle
       : options.title || '';
-
-  const goBack = () =>
-    safeGoBack(navigation as NavigationProps<keyof RouteParamList>);
 
   const canGoBack = navigation.canGoBack();
 
