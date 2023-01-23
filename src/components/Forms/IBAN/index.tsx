@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import React, { useCallback, useRef, useState } from 'react';
-import { Pressable } from 'react-native';
+import { Alert, Platform, Pressable } from 'react-native';
 import type { TextInput } from 'react-native/types';
 import { Spacer } from 'react-native-flex-layout';
 
@@ -104,6 +104,27 @@ export const IBANForm: React.FC<Props> = ({
     setDeleting(false);
   }, [onPressDeleteProp]);
 
+  const confirmDelete = useCallback(async () => {
+    if (Platform.OS === 'web') {
+      const shouldDelete = await globalThis.confirm(
+        'Are you sure you want to delete this IBAN?',
+      );
+
+      shouldDelete && onPressDelete();
+    } else {
+      Alert.alert('Delete IBAN', 'Are you sure you want to delete this IBAN?', [
+        {
+          onPress: onPressDelete,
+          text: 'Delete',
+        },
+        {
+          text: 'Cancel',
+          isPreferred: true,
+        },
+      ]);
+    }
+  }, [onPressDelete]);
+
   return (
     <Stack spacing={Spacing.large} justify="between" flex={1}>
       <Stack spacing={Spacing.large}>
@@ -199,7 +220,7 @@ export const IBANForm: React.FC<Props> = ({
 
         {onPressDeleteProp ? (
           <Box flex={1}>
-            <Button type="danger" onPress={onPressDelete} loading={deleting}>
+            <Button type="danger" onPress={confirmDelete} loading={deleting}>
               Delete
             </Button>
           </Box>
