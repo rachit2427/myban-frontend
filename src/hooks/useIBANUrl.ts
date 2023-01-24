@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { BASE_URL } from '@env';
+
 import type { IBAN } from '@src/types';
 
 type UseIBANUrlProps = Partial<Pick<IBAN, 'iban' | 'firstname' | 'lastname'>> &
@@ -7,7 +9,7 @@ type UseIBANUrlProps = Partial<Pick<IBAN, 'iban' | 'firstname' | 'lastname'>> &
 
 export const useIBANUrl = ({ iban, firstname, lastname }: UseIBANUrlProps) => {
   return useMemo(() => {
-    const baseUrl = 'https://google.com';
+    const baseUrl = BASE_URL + '/view';
 
     const params = Object.fromEntries(
       Object.entries({
