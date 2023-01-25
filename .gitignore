@@ -73,3 +73,6 @@ vendor
 
 # Package-lock
 package-lock.json
+
+# Dist
+server/dist
