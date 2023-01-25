@@ -1,2 +1,2 @@
-export const getName = (firstname?: string, lastname?: string): string =>
+export const getName = (firstname = '', lastname = ''): string =>
   `${firstname} ${lastname}`.trim();

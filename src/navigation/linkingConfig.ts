@@ -1,4 +1,6 @@
-import { BASE_URL } from '@env';
+import { Platform } from 'react-native';
+
+import { APP_SCHEME, BASE_URL } from '@env';
 import type {
   LinkingOptions,
   PartialRoute,
@@ -10,8 +12,9 @@ import type { RouteParamList } from '@src/navigation/routes';
 import { Routes } from '@src/navigation/routes';
 
 export const linkingConfig: LinkingOptions<RouteParamList> = {
-  prefixes: [BASE_URL],
+  prefixes: [APP_SCHEME, BASE_URL],
   config: {
+    initialRouteName: Platform.OS === 'web' ? undefined : Routes.Home,
     screens: {
       [Routes.View]: Routes.View,
       [Routes.NotFound]: '*',
