@@ -1,8 +1,6 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { Pressable } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-
 import { Card } from '@src/components/Card';
 import { Icon } from '@src/components/Icon';
 import { Box } from '@src/components/Layout/Box';
@@ -13,7 +11,7 @@ import { useIsDarkMode } from '@src/hooks/useIsDarkMode';
 import { useTheme } from '@src/hooks/useTheme';
 import { Routes } from '@src/navigation/routes';
 import type { IBANWithID } from '@src/types';
-import type { NavigationProps } from '@src/types/navigation';
+import { useAppNavigation } from '@src/types/navigation';
 import { Spacing } from '@src/utils/Spacing';
 import { getName } from '@src/utils/string';
 
@@ -28,7 +26,7 @@ const IBANCardComponent: React.FC<Props> = ({
 }) => {
   const isDarkMode = useIsDarkMode();
   const { colors: themeColors } = useTheme();
-  const navigation = useNavigation<NavigationProps>();
+  const navigation = useAppNavigation();
   const [ibanName, toggleMasking] = useIBANName(iban);
 
   const name = useMemo(

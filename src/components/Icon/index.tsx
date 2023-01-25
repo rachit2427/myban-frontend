@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Pressable } from 'react-native';
+import React, { memo, useMemo } from 'react';
+import { Platform, Pressable } from 'react-native';
 import type { PressableProps } from 'react-native/types';
 
 import * as SVGs from '@src/assets/svgs';
@@ -15,11 +15,17 @@ interface IconProps extends PressableProps {
 const IconComponent: React.FC<IconProps> = ({
   name,
   color = 'shade800',
-  size = 20,
+  size: sizeProp = 20,
   ...pressableProps
 }) => {
   const { colors: themeColors } = useTheme();
   const Component = SVGs[name];
+
+  const size = useMemo(() => {
+    if (Platform.OS !== 'web') return sizeProp;
+
+    return Math.max(sizeProp, 24);
+  }, [sizeProp]);
 
   return (
     <Wrapper {...pressableProps}>

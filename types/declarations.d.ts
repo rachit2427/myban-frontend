@@ -16,3 +16,5 @@ declare module 'react-native-screen-brightness' {
 declare module '*.png';
 declare module '*.jpeg';
 declare module '*.jpg';
+
+declare function alert(message?: string): string;

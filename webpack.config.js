@@ -10,6 +10,7 @@ const compileNodeModules = [
   // Add every react-native package that needs compiling
   'react-native-qrcode-svg',
   'react-native-shadow-2',
+  'react-native-share',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
