@@ -17,8 +17,8 @@ const babelLoaderConfiguration = {
   test: /\.js$|tsx?$/,
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
-    path.resolve(__dirname, 'index.web.js'), // Entry to your application
-    path.resolve(__dirname, 'src'),
+    path.resolve(appDirectory, 'index.web.js'), // Entry to your application
+    path.resolve(appDirectory, 'src'),
     ...compileNodeModules,
   ],
   use: {
@@ -52,10 +52,10 @@ const imageLoaderConfiguration = {
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, 'index.web.js'),
+    app: path.join(appDirectory, 'index.web.js'),
   },
   output: {
-    path: path.resolve(appDirectory, 'dist'),
+    path: path.resolve(appDirectory, 'server/dist'),
     publicPath: '/',
     filename: 'app.bundle.js',
   },
@@ -74,7 +74,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public/index.html'),
+      template: path.join(appDirectory, 'server/index.html'),
     }),
     new webpack.DefinePlugin({
       // See: https://github.com/necolas/react-native-web/issues/349
