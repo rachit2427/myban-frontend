@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { BuyMeACoffee } from '@src/components/BuyMeACoffee';
+import { Box } from '@src/components/Layout/Box';
 import { ScrollView } from '@src/components/ScrollView';
 import { useTheme } from '@src/hooks/useTheme';
 import { IBANCard } from '@src/screens/Home/components/IBANCard';
@@ -12,9 +14,13 @@ const HomeComponent: React.FC = () => {
 
   return (
     <ScrollView style={{ backgroundColor: themeColors.backgroundSecondary }}>
-      {ibans.map(iban => (
-        <IBANCard key={iban.id} {...iban} />
-      ))}
+      <Box flex={1}>
+        {ibans.map(iban => (
+          <IBANCard key={iban.id} {...iban} />
+        ))}
+      </Box>
+
+      <BuyMeACoffee />
     </ScrollView>
   );
 };
