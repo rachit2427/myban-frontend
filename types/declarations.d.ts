@@ -18,3 +18,4 @@ declare module '*.jpeg';
 declare module '*.jpg';
 
 declare function alert(message?: string): string;
+declare function confirm(message?: string): Promise<boolean>;
