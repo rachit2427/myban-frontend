@@ -13,18 +13,22 @@ const Stack = createNativeStackNavigator<RouteParamList>();
 
 export const AppNavigator: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={defaultScreenOptions}>
-      {Platform.OS === 'web' ? undefined : nativeScreens().screens}
-
+    <Stack.Navigator
+      screenOptions={defaultScreenOptions}
+      initialRouteName={Platform.OS === 'web' ? Routes.NotFound : Routes.Home}
+    >
       <Stack.Group
         screenOptions={{
           presentation: 'modal',
           animation: 'slide_from_bottom',
         }}
       >
-        {commonModals().modals}
         {Platform.OS === 'web' ? undefined : nativeScreens().modals}
+        {commonScreens().modals}
       </Stack.Group>
+
+      {Platform.OS === 'web' ? undefined : nativeScreens().screens}
+      {commonScreens().screens}
     </Stack.Navigator>
   );
 };
@@ -35,7 +39,14 @@ const HomeHeaderLeft = () => (
 
 const HomeHeaderRight = () => <AddNewItem />;
 
-const commonModals = () => ({
+const commonScreens = () => ({
+  screens: (
+    <Stack.Screen
+      name={Routes.NotFound}
+      getComponent={() => require('./screens/NotFound').NotFound}
+      options={{ headerShown: false }}
+    />
+  ),
   modals: (
     <Stack.Screen
       name={Routes.View}
