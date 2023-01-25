@@ -9,16 +9,13 @@ import { getStateFromPath } from '@react-navigation/native';
 import type { RouteParamList } from '@src/navigation/routes';
 import { Routes } from '@src/navigation/routes';
 
-const config = Object.fromEntries(
-  Object.entries(Routes).map(([key, val]) => {
-    return [key, val.toLowerCase()];
-  }),
-);
-
 export const linkingConfig: LinkingOptions<RouteParamList> = {
   prefixes: [BASE_URL],
   config: {
-    screens: config,
+    screens: {
+      [Routes.View]: Routes.View,
+      [Routes.NotFound]: '*',
+    },
   },
   getStateFromPath: (path, options) => {
     let state = getStateFromPath(path, options);
