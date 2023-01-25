@@ -14,6 +14,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { AppEntry } from '@src/AppEntry';
+import { linkingConfig } from '@src/navigation/linkingConfig';
 import { store } from '@src/state';
 
 export const App: React.FC = () => {
@@ -24,7 +25,7 @@ export const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <ReduxProvider store={store}>
-        <NavigationContainer onReady={onReady}>
+        <NavigationContainer onReady={onReady} linking={linkingConfig}>
           <AppEntry />
         </NavigationContainer>
       </ReduxProvider>

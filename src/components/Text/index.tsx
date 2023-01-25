@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { StyleSheet, Text as TextBase } from 'react-native';
-import type { TextProps as TextBaseProps } from 'react-native/types';
+import type { TextProps as TextBaseProps, TextStyle } from 'react-native/types';
 
 import { useTheme } from '@src/hooks/useTheme';
 import type { Colors } from '@src/utils/Colors';
@@ -9,6 +9,7 @@ interface TextProps extends TextBaseProps {
   type?: 'light' | 'regular' | 'medium';
   color?: keyof Colors;
   size?: number;
+  align?: TextStyle['textAlign'];
 }
 
 export const Text = forwardRef<TextBase, TextProps>(
@@ -18,6 +19,7 @@ export const Text = forwardRef<TextBase, TextProps>(
       color: colorProp = 'grey900',
       style: styleProp,
       size = 16,
+      align,
       ...props
     },
     ref,
@@ -34,6 +36,7 @@ export const Text = forwardRef<TextBase, TextProps>(
         fontFamily,
         color,
         fontSize: size,
+        textAlign: align,
       },
       styleProp,
     ]);
