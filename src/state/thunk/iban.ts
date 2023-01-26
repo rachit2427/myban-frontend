@@ -2,9 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Slices } from '@src/state/slices';
 import { replaceIBANInStore } from '@src/state/slices/iban';
-import { getThunkName } from '@src/state/thunk';
 import { IBANStorageService } from '@src/storage/ibans';
 import type { IBAN, IBANWithID } from '@src/types';
+
+const getThunkName = (prefix: string, suffix: string) =>
+  `${prefix}/@THUNK/${suffix}`;
 
 const IBANThunk = {
   ADD: getThunkName(Slices.IBAN, 'ADD_IBAN'),
