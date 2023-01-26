@@ -5,29 +5,18 @@
  * @format
  */
 
-import React, { useCallback } from 'react';
-import { Platform } from 'react-native';
+import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
 
-import { NavigationContainer } from '@react-navigation/native';
-
 import { AppEntry } from '@src/AppEntry';
-import { linkingConfig } from '@src/navigation/linkingConfig';
 import { store } from '@src/state';
 
 export const App: React.FC = () => {
-  const onReady = useCallback(() => {
-    Platform.OS !== 'web' && SplashScreen.hide();
-  }, []);
-
   return (
     <SafeAreaProvider>
       <ReduxProvider store={store}>
-        <NavigationContainer onReady={onReady} linking={linkingConfig}>
-          <AppEntry />
-        </NavigationContainer>
+        <AppEntry />
       </ReduxProvider>
     </SafeAreaProvider>
   );
