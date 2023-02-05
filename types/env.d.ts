@@ -1,5 +1,5 @@
 declare module '@env' {
-  export const APP_ENV: string;
+  export const APP_ENV: 'debug' | 'release';
   export const BASE_URL: string;
   export const APP_SCHEME: string;
   export const SPONSOR_LINK: string;

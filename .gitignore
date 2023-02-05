@@ -69,7 +69,8 @@ yarn-error.log
 vendor
 
 # ENV
-/env/.env
+/env/
+!/env/.env.template
 
 # Package-lock
 package-lock.json
