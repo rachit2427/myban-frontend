@@ -7,6 +7,7 @@ export enum Routes {
   AddNew = 'add-new',
   Edit = 'edit',
   View = 'view',
+  Privacy = 'privacy',
   NotFound = 'not-found',
 }
 
@@ -15,5 +16,6 @@ export interface RouteParamList extends ParamListBase {
   [Routes.AddNew]: undefined;
   [Routes.Edit]: { id: string };
   [Routes.View]: Partial<IBAN> & Required<Pick<IBAN, 'iban'>>;
+  [Routes.Privacy]: undefined;
   [Routes.NotFound]: undefined;
 }
