@@ -16,9 +16,11 @@ const SupportComponent: React.FC = () => {
   return (
     <ScrollView>
       <Stack pt={Spacing.large} spacing={Spacing.medium}>
-        <Text type="medium">Contact Us</Text>
+        <Text color="shade900" type="medium">
+          Contact Us
+        </Text>
 
-        <Text>
+        <Text color="shade800">
           Have any questions? Please contact us at{' '}
           <Text color="blue500" onPress={mailToSupport}>
             rachit.estonia@gmail.com
