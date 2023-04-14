@@ -49,6 +49,12 @@ const commonScreens = () => ({
       />
 
       <Stack.Screen
+        name={Routes.Support}
+        getComponent={() => require('./screens/Support').Support}
+        options={{ headerTitle: 'Support' }}
+      />
+
+      <Stack.Screen
         name={Routes.NotFound}
         getComponent={() => require('./screens/NotFound').NotFound}
         options={{ headerShown: false }}

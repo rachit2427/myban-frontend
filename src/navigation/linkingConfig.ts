@@ -18,6 +18,7 @@ export const linkingConfig: LinkingOptions<RouteParamList> = {
     screens: {
       [Routes.View]: Routes.View,
       [Routes.Privacy]: Routes.Privacy,
+      [Routes.Support]: Routes.Support,
       [Routes.NotFound]: '*',
     },
   },
