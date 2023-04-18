@@ -17,6 +17,8 @@ export const linkingConfig: LinkingOptions<RouteParamList> = {
     initialRouteName: Platform.OS === 'web' ? undefined : Routes.Home,
     screens: {
       [Routes.View]: Routes.View,
+      [Routes.Privacy]: Routes.Privacy,
+      [Routes.Support]: Routes.Support,
       [Routes.NotFound]: '*',
     },
   },
