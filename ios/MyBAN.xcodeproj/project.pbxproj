@@ -44,6 +44,7 @@
 		3B4392A12AC88292D35C810B /* Pods-MyBAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBAN.debug.xcconfig"; path = "Target Support Files/Pods-MyBAN/Pods-MyBAN.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-MyBAN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBAN.release.xcconfig"; path = "Target Support Files/Pods-MyBAN/Pods-MyBAN.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-MyBAN-MyBANTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBAN-MyBANTests.debug.xcconfig"; path = "Target Support Files/Pods-MyBAN-MyBANTests/Pods-MyBAN-MyBANTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C67526029EED90900C602DC /* MyBAN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MyBAN.entitlements; path = MyBAN/MyBAN.entitlements; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-MyBAN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyBAN.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		786F4984C5BE4477B78807A1 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MyBAN/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		13B07FAE1A68108700A75B9A /* MyBAN */ = {
 			isa = PBXGroup;
 			children = (
+				5C67526029EED90900C602DC /* MyBAN.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -505,6 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MyBAN/MyBAN.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -537,6 +540,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MyBAN/MyBAN.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
