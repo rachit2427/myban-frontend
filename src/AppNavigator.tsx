@@ -41,11 +41,25 @@ const HomeHeaderRight = () => <AddNewItem />;
 
 const commonScreens = () => ({
   screens: (
-    <Stack.Screen
-      name={Routes.NotFound}
-      getComponent={() => require('./screens/NotFound').NotFound}
-      options={{ headerShown: false }}
-    />
+    <>
+      <Stack.Screen
+        name={Routes.Privacy}
+        getComponent={() => require('./screens/Privacy').Privacy}
+        options={{ headerTitle: 'Privacy Policy' }}
+      />
+
+      <Stack.Screen
+        name={Routes.Support}
+        getComponent={() => require('./screens/Support').Support}
+        options={{ headerTitle: 'Support' }}
+      />
+
+      <Stack.Screen
+        name={Routes.NotFound}
+        getComponent={() => require('./screens/NotFound').NotFound}
+        options={{ headerShown: false }}
+      />
+    </>
   ),
   modals: (
     <Stack.Screen
