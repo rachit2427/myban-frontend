@@ -6,6 +6,7 @@ const port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '.well-known')));
 
 app.get('/version', (_, res) => {
   return res.json({

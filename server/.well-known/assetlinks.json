@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.MyBAN",
+      "sha256_cert_fingerprints": [
+        "E3:31:EA:5B:6F:F2:41:64:79:F8:6D:70:8E:05:6A:97:96:39:75:74:82:16:80:03:0B:92:E2:48:56:AD:EC:C8"
+      ]
+    }
+  }
+]
