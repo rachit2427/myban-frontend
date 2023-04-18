@@ -1,3 +1,6 @@
+# Buy me a coffee!
+Like my work? Consider sponsoring [here](https://www.buymeacoffee.com/rachitdua).
+
 # My IBAN
 
 This app aims to provide a simple way to share IBAN number(s) with each other.
