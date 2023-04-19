@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { Platform } from 'react-native';
 
 import { BuyMeACoffee } from '@src/components/BuyMeACoffee';
-import { Github } from '@src/components/Github';
 import { Box } from '@src/components/Layout/Box';
 import { ScrollView } from '@src/components/ScrollView';
 import { useTheme } from '@src/hooks/useTheme';
@@ -23,7 +22,7 @@ const HomeComponent: React.FC = () => {
       </Box>
 
       {/* iOS doesn't allow donations outside the app. @todo - support in app purchases */}
-      {Platform.OS === 'ios' ? <Github /> : <BuyMeACoffee />}
+      {Platform.OS === 'ios' ? null : <BuyMeACoffee />}
     </ScrollView>
   );
 };
