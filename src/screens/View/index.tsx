@@ -1,8 +1,17 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import {
+  Alert,
+  Image,
+  Linking,
+  Platform,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 
+import { APPLE_APP_STORE_LINK, GOOGLE_PLAY_STORE_LINK } from '@env';
 import Clipboard from '@react-native-clipboard/clipboard';
 
+import DownloadOnAppStore from '@src/assets/img/download-on-app-store.svg';
 import { IBANQR } from '@src/components/IBANQR';
 import { Icon } from '@src/components/Icon';
 import { Input } from '@src/components/Input';
@@ -37,30 +46,77 @@ const ViewScreenComponent: React.FC = () => {
     });
   }, [maskedIBAN, name, navigation]);
 
+  const openOnStore = useCallback((storeLink: string) => {
+    if (!storeLink) {
+      return;
+    }
+
+    Linking.openURL(storeLink).catch(() => {
+      Alert.alert(
+        'Something went wrong!',
+        'Could not open store link. Please inform the developer.',
+      );
+    });
+  }, []);
+
+  const getOnAppStore = useCallback(
+    () => openOnStore(APPLE_APP_STORE_LINK),
+    [openOnStore],
+  );
+
+  const getOnPlayStore = useCallback(
+    () => openOnStore(GOOGLE_PLAY_STORE_LINK),
+    [openOnStore],
+  );
+
   return (
     <ScrollView>
-      <Stack pt={Spacing.large} spacing={Spacing['xx-large']} justify="start">
-        <Box align="center">
-          <IBANQR iban={iban} firstname={firstname} lastname={lastname} />
-        </Box>
-
-        <Stack spacing={Spacing.medium}>
-          {name.length !== 0 ? (
-            <Box mt={Spacing.large}>
-              <Text type="medium" size={24} color="shade800">
-                {name}'s IBAN
-              </Text>
-            </Box>
-          ) : null}
-
-          <Box w="100%">
-            <Input
-              value={iban}
-              editable={false}
-              accessoryRight={<CopyToClipboard text={iban} />}
-            />
+      <Stack flex={1} justify="between">
+        <Stack pt={Spacing.large} spacing={Spacing['xx-large']} justify="start">
+          <Box align="center">
+            <IBANQR iban={iban} firstname={firstname} lastname={lastname} />
           </Box>
+
+          <Stack spacing={Spacing.medium}>
+            {name.length !== 0 ? (
+              <Box mt={Spacing.large}>
+                <Text type="medium" size={24} color="shade800">
+                  {name}'s IBAN
+                </Text>
+              </Box>
+            ) : null}
+
+            <Box w="100%">
+              <Input
+                value={iban}
+                editable={false}
+                accessoryRight={<CopyToClipboard text={iban} />}
+              />
+            </Box>
+          </Stack>
         </Stack>
+
+        {Platform.OS === 'web' ? (
+          <Stack direction="row">
+            <Pressable
+              style={[styles.storeContainer, { padding: Spacing.medium }]}
+              onPress={getOnAppStore}
+            >
+              <DownloadOnAppStore height="100%" width="100%" />
+            </Pressable>
+
+            <Pressable
+              style={[styles.storeContainer, { padding: Spacing['xx-small'] }]}
+              onPress={getOnPlayStore}
+            >
+              <Image
+                source={require('@src/assets/img/get-on-google-play.png')}
+                style={styles.playStoreImage}
+                resizeMode="contain"
+              />
+            </Pressable>
+          </Stack>
+        ) : null}
       </Stack>
     </ScrollView>
   );
@@ -99,4 +155,14 @@ export const ViewScreen = memo(ViewScreenComponent);
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  playStoreImage: {
+    height: '100%',
+    width: '100%',
+  },
+  storeContainer: {
+    width: '50%',
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
