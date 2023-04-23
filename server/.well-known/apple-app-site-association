@@ -2,13 +2,8 @@
   "applinks": {
       "details": [
            {
-             "appIDs": [ "6447620774.eu.myban"],
-             "components": [
-               {
-                  "/": "*",
-                  "comment": "Matches any URL"
-               }
-             ]
+             "appIDs": "6447620774.eu.myban",
+             "paths": [ "*" ]
            }
        ]
    }

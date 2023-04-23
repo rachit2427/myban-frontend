@@ -33,6 +33,7 @@ export const getInputStyles = ({
     borderWidth: 0,
     backgroundColor: 'transparent',
     fontSize: 16,
+    fontFamily: 'Roboto-Regular',
     height: '100%',
     width: '100%',
     flex: 1,
